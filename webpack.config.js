@@ -13,6 +13,7 @@ module.exports = {
     // You need an emitted file for each entrypoint into your code, e.g. the main script and the ccs or ccs consult script it calls
     loopcasual: "./src/main.ts",
     "loopcasual-combat": "./src/combat.ts",
+    "casual-Ascend": "./src/gash-hop.ts",
   },
   // Turns on tree-shaking and minification in the default Terser minifier
   // https://webpack.js.org/plugins/terser-webpack-plugin/
