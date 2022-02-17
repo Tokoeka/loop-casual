@@ -11,7 +11,10 @@ export const KnobQuest: Quest = {
       after: [],
       ready: () => myLevel() >= 5,
       completed: () => step("questL05Goblin") >= 0,
-      do: () => visitUrl("council.php"),
+      do: (): void => {
+        visitUrl("council.php");
+        visitUrl("guild.php?place=challenge");
+      },
       limit: { tries: 1 },
       freeaction: true,
     },
