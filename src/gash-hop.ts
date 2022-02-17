@@ -1,5 +1,5 @@
 import { useSkill } from "kolmafia";
-import { $class, $classes, $item, ascend, Lifestyle, Paths, prepareAscension } from "libram";
+import { $class, $classes, $item, ascend, Clan, Lifestyle, Paths, prepareAscension } from "libram";
 
 const timespinnerTargets = [
   "Busta_Rhymes",
@@ -29,6 +29,8 @@ export function main(args = ""): void {
     : args.includes(`at`)
     ? $class`Accordion Thief`
     : $class`Seal Clubber`;
+
+  Clan.join("Alliance From Heck");
 
   prepareAscension({
     workshed: `Asdon Martin keyfob`,
