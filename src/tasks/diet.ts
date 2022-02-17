@@ -55,12 +55,12 @@ export const DietQuest: Quest = {
     {
       name: "Sausage",
       after: ["Consume"],
-      completed: () => !have($item`Kramco Sausage-o-Matic™`) || get("_sausagesEaten") >= 23, // Cap at 23 sausages to avoid burning through an entire supply
+      completed: () => !have($item`Kramco Sausage-o-Matic™`) || get("_sausagesEaten") >= 10, // Cap at 10 sausages to save some for end of day
       ready: () => have($item`magical sausage casing`),
       do: (): void => {
         eat(1, $item`magical sausage`);
       },
-      limit: { tries: 23 },
+      limit: { tries: 10 },
       freeaction: true,
     },
     {
