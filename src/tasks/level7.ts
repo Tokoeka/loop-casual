@@ -65,9 +65,9 @@ const Alcove: Task[] = [
     acquire: [
       { item: $item`gravy boat` },
       // Init boosters
-      { item: $item`ear candle`, price: 2000, optional: true },
-      { item: $item`panty raider camouflage`, price: 2000, optional: true },
-      { item: $item`Freddie's blessing of Mercury`, price: 2000, optional: true },
+      { item: $item`ear candle`, price: 2000, optional: false },
+      { item: $item`panty raider camouflage`, price: 2000, optional: false },
+      { item: $item`Freddie's blessing of Mercury`, price: 2000, optional: false },
     ],
     completed: () => get("cyrptAlcoveEvilness") <= 25,
     do: $location`The Defiled Alcove`,

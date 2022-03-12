@@ -178,7 +178,7 @@ const Office: Task[] = [
     name: "Office Clip",
     after: ["Office Files", "Apartment Files"],
     acquire: [
-      { item: $item`short writ of habeas corpus`, num: 1, price: runawayValue, optional: true },
+      { item: $item`short writ of habeas corpus`, num: 1, price: runawayValue, optional: false },
     ],
     completed: () =>
       have($item`boring binder clip`) ||
