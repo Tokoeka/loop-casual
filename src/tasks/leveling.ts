@@ -264,7 +264,7 @@ export const LevelingQuest: Quest = {
         equip: $items`makeshift garbage shirt`,
         familiar: $familiar`Galloping Grill`,
       },
-      limit: { tries: 11 },
+      limit: { tries: 12 },
       freecombat: true,
     },
     {

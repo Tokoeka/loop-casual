@@ -128,7 +128,7 @@ const Apartment: Task[] = [
       .ignoreNoBanish($monster`pygmy shaman`)
       .ignore(),
     choices: { 780: 1 },
-    limit: { tries: 9 },
+    limit: { tries: 10 },
   },
   {
     name: "Finish Apartment",
