@@ -270,7 +270,7 @@ export const LevelingQuest: Quest = {
         equip: $items`makeshift garbage shirt, unbreakable umbrella`,
         familiar: $familiar`Left-Hand Man`,
       },
-      limit: { tries: 11 },
+      limit: { tries: 12 },
       freecombat: true,
     },
     {

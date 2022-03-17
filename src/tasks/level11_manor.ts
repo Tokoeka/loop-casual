@@ -62,7 +62,7 @@ const Manor1: Task[] = [
       .banish(...$monsters`banshee librarian, bookbat`)
       .kill($monster`writing desk`),
     choices: { 163: 4, 888: 4, 889: 5, 894: 1 },
-    limit: { soft: 10 },
+    limit: { soft: 15 },
   },
   {
     name: "Finish Floor1",
