@@ -158,7 +158,7 @@ const Zepplin: Task[] = [
       }, ...$monsters`man with the red buttons, red skeleton, red butler, Red Fox`)
       .banish(...$monsters`Red Herring, Red Snapper`)
       .kill(...$monsters`man with the red buttons, red skeleton, red butler, Red Fox`),
-    limit: { soft: 12 },
+    limit: { soft: 15 },
   },
 ];
 
