@@ -105,7 +105,7 @@ const Zepplin: Task[] = [
   {
     name: "Protesters",
     after: ["Protesters Start"],
-    completed: () => get("zeppelinProtestors") >= 80,
+    completed: () => get("zeppelinProtestors") >= 75,
     acquire: [{ item: $item`11-leaf clover` }],
     prepare: (): void => {
       if (get("zeppelinProtestors") < 80) {
@@ -122,8 +122,18 @@ const Zepplin: Task[] = [
     limit: { tries: 3, message: "Maybe your available sleaze damage is too low." },
   },
   {
-    name: "Protesters Finish",
+    name: "Protesters Last One",
     after: ["Protesters"],
+    completed: () => get("zeppelinProtestors") >= 80,
+    acquire: [{ item: $item`cigarette lighter` }],
+    do: $location`A Mob of Zeppelin Protesters`,
+    combat: new CombatStrategy().killHard($monster`The Nuge`).macro(new Macro().item($item`cigarette lighter`)),
+    choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
+    limit: { tries: 2, message: "Well This didn't work" },
+  },
+  {
+    name: "Protesters Finish",
+    after: ["Protesters Last One"],
     completed: () => step("questL11Ron") >= 2,
     do: $location`A Mob of Zeppelin Protesters`,
     combat: new CombatStrategy().killHard($monster`The Nuge`),
