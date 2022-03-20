@@ -35,7 +35,7 @@ export function main(args = ""): void {
   prepareAscension({
     workshed: `Asdon Martin keyfob`,
     garden: `packet of thanksgarden seeds`,
-    eudora: `Our Daily Candles™ order form`,
+    eudora: `New-You Club Membership Form`,
     chateau: {
       desk: `continental juice bar`,
       nightstand: $classes`Pastamancer, Sauceror`.includes(newClass)
