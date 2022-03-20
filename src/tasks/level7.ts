@@ -191,7 +191,7 @@ const Nook: Task[] = [
     outfit: (): OutfitSpec => {
       return {
         equip: tryCape($item`costume sword`, $item`gravy boat`),
-        modifier: "item 500max",
+        modifier: "item 500max, -outfit Eldritch Equipage",
         familiar: $familiar`Melodramedary`,
         skipDefaults: true,
       };
@@ -244,7 +244,7 @@ const Nook: Task[] = [
     outfit: (): OutfitSpec => {
       return {
         equip: tryCape($item`costume sword`, $item`gravy boat`),
-        modifier: "item 500max",
+        modifier: "item 500max, -outfit Eldritch Equipage",
       };
     },
     choices: { 155: 5, 1429: 1 },
