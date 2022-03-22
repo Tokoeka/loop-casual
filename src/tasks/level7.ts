@@ -123,7 +123,7 @@ const Cranny: Task[] = [
     completed: () => get("cyrptCrannyEvilness") === 0,
     do: $location`The Defiled Cranny`,
     combat: new CombatStrategy(true).killHard(),
-    limit: { tries: 1 },
+    limit: { tries: 2 },
   },
 ];
 
