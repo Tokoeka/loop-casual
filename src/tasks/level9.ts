@@ -134,7 +134,7 @@ const Twin: Task[] = [
     },
     choices: { 606: 2, 608: 1 },
     acquire: [{ item: $item`rusty hedge trimmers` }],
-    outfit: { modifier: "item 50min" },
+    outfit: { modifier: "item 50min, -outfit eldritch equipage" },
     limit: { tries: 1 },
   },
   {
