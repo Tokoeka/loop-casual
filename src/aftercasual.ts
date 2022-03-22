@@ -47,7 +47,9 @@ if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscen
     });
     const best = dupeVals.sort((a, b) => b.value - a.value)[0];
     set(`choiceAdventure1125`, "1&iid=" + toInt(best.dupeIt));
-    adv1($location`the deep machine tunnels`);
+    while (get(`lastDMTDuplication`) < myAscensions()){
+        adv1($location`the deep machine tunnels`);
+    }
 }
 
 if (mySign() !== "Platypus" && !get("moonTuned")) {
