@@ -60,7 +60,7 @@ export const MiscQuest: Quest = {
       limit: { tries: 1 },
       freeaction: true,
     },
-    {
+    /*{
       name: "Floundry",
       after: [],
       completed: () =>
@@ -78,7 +78,7 @@ export const MiscQuest: Quest = {
       },
       limit: { tries: 1 },
       freeaction: true,
-    },
+    },*/
     {
       name: "Short Cook",
       after: [],
