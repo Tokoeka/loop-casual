@@ -55,14 +55,14 @@ export const MiscQuest: Quest = {
       limit: { tries: 1 },
       freeaction: true,
     },
-    {
+    /*{
       name: "Floundry",
       after: [],
       completed: () => have($item`fish hatchet`),
       do: () => cliExecute("acquire 1 fish hatchet"),
       limit: { tries: 1 },
       freeaction: true,
-    },
+    },*/
     {
       name: "Short Cook",
       after: [],
