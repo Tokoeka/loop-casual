@@ -13,6 +13,7 @@ import {
   myTurncount,
   retrieveItem,
   Skill,
+  toItem,
   toString,
   totalTurnsPlayed,
   use,
@@ -26,9 +27,9 @@ import {
   $monster,
   $skill,
   AsdonMartin,
+  chunk,
   ensureEffect,
   get,
-  getBanishedMonsters,
   getKramcoWandererChance,
   have,
   Macro,
@@ -49,6 +50,30 @@ export interface CombatResource extends Resource {
 
 export interface BanishSource extends CombatResource {
   do: Item | Skill;
+}
+
+function getBanishedMonsters(): Map<Item | Skill, Monster> {
+  const banishes = chunk(get("banishedMonsters").split(":"), 3);
+
+  const result = new Map<Item | Skill, Monster>();
+
+  for (const [foe, banisher] of banishes) {
+    if (foe === undefined || banisher === undefined) break;
+    // toItem doesn"t error if the item doesn"t exist, so we have to use that.
+    const banisherItem = toItem(banisher);
+    const banisherObject = [
+      Item.get("none"),
+      Item.get(`training scroll:  Snokebomb`),
+      Item.get(`tomayohawk-style reflex hammer`),
+      null,
+    ].includes(banisherItem)
+      ? banisher.toLowerCase() === "saber force"
+        ? Skill.get(`7311`)
+        : Skill.get(banisher)
+      : banisherItem;
+    result.set(banisherObject, Monster.get(foe));
+  }
+  return result;
 }
 
 export const banishSources: BanishSource[] = [
@@ -150,8 +175,6 @@ export function unusedBanishes(to_banish: Monster[]): BanishSource[] {
     const banished_with = already_banished.get(monster);
     if (banished_with === undefined) {
       to_banish.push(monster);
-    } else if (banished_with == $skill`Saber Force`) {
-      used_banishes.add($skill`7311`);
     } else {
       used_banishes.add(banished_with);
       // Map strange banish tracking to our resources
