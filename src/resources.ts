@@ -13,6 +13,7 @@ import {
   myTurncount,
   retrieveItem,
   Skill,
+  toString,
   totalTurnsPlayed,
   use,
   weightAdjustment,
@@ -149,6 +150,8 @@ export function unusedBanishes(to_banish: Monster[]): BanishSource[] {
     const banished_with = already_banished.get(monster);
     if (banished_with === undefined) {
       to_banish.push(monster);
+    } else if (banished_with == $skill`Saber Force`) {
+      used_banishes.add($skill`7311`);
     } else {
       used_banishes.add(banished_with);
       // Map strange banish tracking to our resources
@@ -317,7 +320,7 @@ export const runawaySources: RunawaySource[] = [
         ensureEffect($effect`Ode to Booze`, 5);
       }
     },
-    equip: [runawayFamiliar, ...familiarGear, $item`fish hatchet`],
+    equip: [runawayFamiliar, ...familiarGear],
     do: new Macro().runaway(),
     chance: () => 1,
     banishes: false,
