@@ -7,7 +7,7 @@ export const routing: string[] = [
 
   // Pickup items
   "Misc/Short Cook",
-  "Misc/Floundry",
+  //"Misc/Floundry",
   "Misc/Voting",
   "Misc/Acquire Kgnee",
 
