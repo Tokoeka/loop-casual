@@ -46,6 +46,7 @@ if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscen
         };
     });
     const best = dupeVals.sort((a, b) => b.value - a.value)[0];
+    set(`choiceAdventure1119`, 4);
     set(`choiceAdventure1125`, "1&iid=" + toInt(best.dupeIt));
     while (get(`lastDMTDuplication`) < myAscensions()){
         adv1($location`the deep machine tunnels`);
