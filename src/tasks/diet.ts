@@ -50,7 +50,7 @@ export const DietQuest: Quest = {
       name: "Consume",
       after: [],
       completed: () =>
-        myDaycount() > 1 || (myFullness() >= args.stomach && myInebriety() >= args.liver),
+        myDaycount() > 1 || (myFullness() >= args.stomach || myInebriety() >= args.liver),
       ready: () => myLevel() >= 13 || myAdventures() <= 1,
       do: (): void => {
         if (have($item`astral six-pack`)) {
