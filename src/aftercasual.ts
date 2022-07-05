@@ -1,6 +1,7 @@
 import {
     adv1,
     cliExecute,
+    equip,
     mallPrice,
     myAscensions,
     mySign,
@@ -22,6 +23,7 @@ import {
     $items,
     $location,
     $skill,
+    $slot,
     AsdonMartin,
     get,
     getSaleValue,
@@ -87,6 +89,7 @@ if (get(`lastEncounter`) !== `Lava Dogs`){
     }
 
     const calderaTurns = get(`_calderaStart`, myTurncount());
+    equip($slot`pants`, $item`designer sweatpants`);
 
 
     advMacro(

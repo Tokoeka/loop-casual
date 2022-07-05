@@ -265,6 +265,7 @@ export class Outfit {
       )
         this.equip($item`protonic accelerator pack`);
       this.equip($item`vampyric cloake`);
+      this.equip($item`designer sweatpants`);
       if (myBasestat($stat`mysticality`) >= 25) this.equip($item`Mr. Cheeng's spectacles`);
     }
 
