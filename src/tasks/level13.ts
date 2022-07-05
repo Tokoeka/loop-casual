@@ -1,5 +1,5 @@
-import { myLevel, runChoice, useSkill, visitUrl } from "kolmafia";
-import { $effects, $familiar, $item, $items, $location, $skill, $stat, get, Macro } from "libram";
+import { eat, equip, familiarEquippedEquipment, itemAmount, myAdventures, myLevel, runChoice, useFamiliar, useSkill, visitUrl } from "kolmafia";
+import { $effects, $familiar, $item, $items, $location, $skill, $slot, $stat, get, have, Macro } from "libram";
 import { CombatStrategy } from "../combat";
 import { Quest, step, Task } from "./structure";
 
@@ -289,7 +289,21 @@ export const TowerQuest: Quest = {
       name: "Maze",
       after: ["Frank"],
       completed: () => step("questL13Final") > 4,
-      prepare: () => useSkill($skill`Cannelloni Cocoon`),
+      prepare: () => {
+        useSkill($skill`Cannelloni Cocoon`);
+        if (
+          have($familiar`Left-Hand Man`) &&
+          familiarEquippedEquipment($familiar`Left-Hand Man`) === $item`Kramco Sausage-o-Matic™`
+        ) {
+          useFamiliar($familiar`Left-Hand Man`);
+          equip($slot`familiar`, $item`none`);
+        }
+        while(myAdventures() < 9 && (itemAmount($item`magical sausage`) + itemAmount($item`magical sausage casing`)) > 1){
+          //only ate 10 magic sausage at start of day
+          //eat enough to get adventures up to 9 prior to maze, to ensure LC does not break during maze, and to 
+          eat(1, $item`magical sausage`);
+        }
+      },
       do: $location`The Hedge Maze`,
       choices: { 1004: 1, 1005: 2, 1008: 2, 1011: 2, 1013: 1, 1022: 1 },
       outfit: {
