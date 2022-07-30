@@ -288,6 +288,7 @@ export const TowerQuest: Quest = {
     {
       name: "Maze",
       after: ["Frank"],
+      ready: () => myAdventures() >= 4,
       completed: () => step("questL13Final") > 4,
       prepare: () => {
         useSkill($skill`Cannelloni Cocoon`);
