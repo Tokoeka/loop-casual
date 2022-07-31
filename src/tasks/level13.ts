@@ -1,5 +1,28 @@
-import { eat, equip, familiarEquippedEquipment, itemAmount, myAdventures, myLevel, runChoice, useFamiliar, useSkill, visitUrl } from "kolmafia";
-import { $effects, $familiar, $item, $items, $location, $skill, $slot, $stat, get, have, Macro } from "libram";
+import {
+  eat,
+  equip,
+  familiarEquippedEquipment,
+  itemAmount,
+  myAdventures,
+  myLevel,
+  runChoice,
+  useFamiliar,
+  useSkill,
+  visitUrl,
+} from "kolmafia";
+import {
+  $effects,
+  $familiar,
+  $item,
+  $items,
+  $location,
+  $skill,
+  $slot,
+  $stat,
+  get,
+  have,
+  Macro,
+} from "libram";
 import { CombatStrategy } from "../combat";
 import { Quest, step, Task } from "./structure";
 
@@ -299,10 +322,16 @@ export const TowerQuest: Quest = {
           useFamiliar($familiar`Left-Hand Man`);
           equip($slot`familiar`, $item`none`);
         }
-        while(myAdventures() < 9 && (itemAmount($item`magical sausage`) + itemAmount($item`magical sausage casing`)) > 1){
+        while (
+          myAdventures() < 9 &&
+          itemAmount($item`magical sausage`) + itemAmount($item`magical sausage casing`) > 1
+        ) {
           //only ate 10 magic sausage at start of day
-          //eat enough to get adventures up to 9 prior to maze, to ensure LC does not break during maze, and to 
+          //eat enough to get adventures up to 9 prior to maze, to ensure LC does not break during maze
           eat(1, $item`magical sausage`);
+        }
+        if (myAdventures() < 5) {
+          throw `do not have enough adventures for maze`;
         }
       },
       do: $location`The Hedge Maze`,

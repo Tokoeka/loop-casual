@@ -1,4 +1,14 @@
-import { adv1, equip, equippedAmount, equippedItem, Item, Location, print, setAutoAttack, Slot } from "kolmafia";
+import {
+  adv1,
+  equip,
+  equippedAmount,
+  equippedItem,
+  Item,
+  Location,
+  print,
+  setAutoAttack,
+  Slot,
+} from "kolmafia";
 import { $item, Macro } from "libram";
 
 export function debug(message: string, color?: string): void {
@@ -31,15 +41,15 @@ export function advMacroAA(
 ): void {
   let n = 0;
   const condition = () => {
-      return typeof parameter === "number" ? n < parameter : parameter();
+    return typeof parameter === "number" ? n < parameter : parameter();
   };
   macro.setAutoAttack();
   while (condition()) {
-      adv1(location, -1, () => {
-          return Macro.if_("!pastround 2", macro).abort().toString();
-      });
-      if (afterCombatAction) afterCombatAction();
-      n++;
+    adv1(location, -1, () => {
+      return Macro.if_("!pastround 2", macro).abort().toString();
+    });
+    if (afterCombatAction) afterCombatAction();
+    n++;
   }
 }
 
@@ -52,23 +62,22 @@ export function advMacro(
   setAutoAttack(0);
   let n = 0;
   const condition = () => {
-      return typeof parameter === "number" ? n < parameter : parameter();
+    return typeof parameter === "number" ? n < parameter : parameter();
   };
 
   while (condition()) {
-      adv1(location, -1, () => {
-          return Macro.if_("!pastround 2", macro).abort().toString();
-      });
-      if (afterCombatAction) afterCombatAction();
-      n++;
+    adv1(location, -1, () => {
+      return Macro.if_("!pastround 2", macro).abort().toString();
+    });
+    if (afterCombatAction) afterCombatAction();
+    n++;
   }
 }
 
 export function unequip(item: Item): void {
   while (equippedAmount(item) > 0) {
-      const slot = Slot.all().find((equipmentSlot) => equippedItem(equipmentSlot) === item);
-      if (!slot) return;
-      equip(slot, $item`none`);
+    const slot = Slot.all().find((equipmentSlot) => equippedItem(equipmentSlot) === item);
+    if (!slot) return;
+    equip(slot, $item`none`);
   }
 }
-

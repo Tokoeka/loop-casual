@@ -1,7 +1,6 @@
-import { useSkill } from "kolmafia";
 import { $class, $classes, $item, ascend, Clan, Lifestyle, Paths, prepareAscension } from "libram";
 
-const timespinnerTargets = [
+/* const timespinnerTargets = [
   "Busta_Rhymes",
   "Manendra",
   "Gausie",
@@ -10,7 +9,7 @@ const timespinnerTargets = [
   "ReverKiller",
   "phreddrickv2",
   "The Dictator",
-];
+]; */
 
 /*while ($skill`Experience Safari`.timescast < get("skillLevel180") && safariTargets.length) {
     useSkill($skill`Experience Safari`, 1, safariTargets[0]);

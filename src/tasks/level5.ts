@@ -22,7 +22,7 @@ export const KnobQuest: Quest = {
       name: "Outskirts",
       after: [],
       completed: () => have($item`Knob Goblin encryption key`) || step("questL05Goblin") > 0,
-      prepare: (): void => { 
+      prepare: (): void => {
         visitUrl("guild.php?place=challenge");
       },
       do: $location`The Outskirts of Cobb's Knob`,
