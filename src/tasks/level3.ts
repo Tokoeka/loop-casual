@@ -1,5 +1,5 @@
 import { getProperty, myLevel, runChoice, runCombat, visitUrl } from "kolmafia";
-import { $effects } from "libram";
+import { $effects, $items } from "libram";
 import { CombatStrategy } from "../combat";
 import { Quest, step } from "./structure";
 
@@ -41,7 +41,7 @@ export const TavernQuest: Quest = {
         }
       },
       effects: $effects`Belch the Rainbow™, Benetton's Medley of Diversity`,
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat", equip: $items`June cleaver` },
       combat: new CombatStrategy().ignoreNoBanish(),
       choices: { 509: 1, 510: 1, 511: 2, 514: 2, 515: 2, 496: 2, 513: 2 },
       limit: { tries: 10 },

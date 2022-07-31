@@ -1,4 +1,4 @@
-import { cliExecute, floor, itemAmount, myLevel, use, visitUrl } from "kolmafia";
+import { buy, cliExecute, floor, Item, itemAmount, mallPrice, myLevel, use, visitUrl } from "kolmafia";
 import {
   $effect,
   $effects,
@@ -99,7 +99,7 @@ const Oil: Task[] = [
     after: ["Start Peaks"],
     completed: () => get("oilPeakProgress") === 0,
     do: $location`Oil Peak`,
-    outfit: { modifier: "ML" },
+    outfit: { modifier: "ML", equip: $items`june cleaver` },
     combat: new CombatStrategy().kill(),
     limit: { tries: 6 },
   },
@@ -160,6 +160,29 @@ const Twin: Task[] = [
     limit: { tries: 1 },
   },
 ];
+
+/* const bridgeExtenders: Map<Item[], number[]> = new Map<Item[], number[]>([[$items`snow boards, snow berries`, [2, 5]], [$items`Smut orc keepsake box`, [1, 5]], [$items`X, Bridge truss`, [23, 15]]]);
+
+export function bestExtender() {
+  const chasmLeft = 3 - get("chasmBridgeProgress");
+  const extenders = Array.from(bridgeExtenders)
+  const extendList = extenders.map((bridgeItem) => {
+    const extender = bridgeItem[0][0];
+    const buyable = extender.tradeable ? extender : bridgeItem[0][1];
+    const progressPerExtender = bridgeItem[1][1];
+    const numberReqPerExtender = bridgeItem[1][0];
+    const requiredExtenders = Math.ceil(chasmLeft/progressPerExtender);
+    const totalReq = numberReqPerExtender * requiredExtenders;
+    return {
+      extender: extender,
+      buyable: buyable,
+      req: totalReq,
+      cost: mallPrice(buyable) * totalReq,
+    }
+  });
+  const best = extendList.sort((a,b) => a.cost - b.cost)[0];
+  return best;
+} */
 
 export const ChasmQuest: Quest = {
   name: "Orc Chasm",

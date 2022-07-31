@@ -72,7 +72,7 @@ const Copperhead: Task[] = [
     ready: () => shenItem($item`Murphy's Rancid Black Flag`) && step("questL10Garbage") < 10,
     completed: () => step("questL11Shen") === 999 || have($item`Murphy's Rancid Black Flag`),
     do: $location`The Castle in the Clouds in the Sky (Top Floor)`,
-    outfit: { equip: $items`Mohawk wig`, modifier: "-combat" },
+    outfit: { equip: $items`Mohawk wig, June cleaver`, modifier: "-combat" },
     choices: { 675: 4, 676: 4, 677: 4, 678: 1, 679: 1, 1431: 4 },
     combat: new CombatStrategy().killHard($monster`Burning Snake of Fire`),
     limit: { soft: 10 },
@@ -84,7 +84,7 @@ const Copperhead: Task[] = [
     ready: () => shenItem($item`Murphy's Rancid Black Flag`) && step("questL10Garbage") >= 10,
     completed: () => step("questL11Shen") === 999 || have($item`Murphy's Rancid Black Flag`),
     do: $location`The Castle in the Clouds in the Sky (Top Floor)`,
-    outfit: { modifier: "+combat" },
+    outfit: { modifier: "+combat", equip: $items`june cleaver` },
     combat: new CombatStrategy().killHard($monster`Burning Snake of Fire`),
     limit: { soft: 10 },
     delay: 5,
@@ -117,7 +117,7 @@ const Zepplin: Task[] = [
     do: $location`A Mob of Zeppelin Protesters`,
     combat: new CombatStrategy().killHard($monster`The Nuge`),
     choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
-    outfit: { modifier: "sleaze dmg, sleaze spell dmg", familiar: $familiar`Left-Hand Man` },
+    outfit: { modifier: "sleaze dmg, sleaze spell dmg", familiar: $familiar`Left-Hand Man`, equip: $items`june cleaver` },
     freeaction: true, // fully maximize outfit
     limit: { tries: 3, message: "Maybe your available sleaze damage is too low." },
   },
@@ -127,7 +127,9 @@ const Zepplin: Task[] = [
     completed: () => get("zeppelinProtestors") >= 80,
     acquire: [{ item: $item`cigarette lighter` }],
     do: $location`A Mob of Zeppelin Protesters`,
-    combat: new CombatStrategy().killHard($monster`The Nuge`).macro(new Macro().item($item`cigarette lighter`)),
+    combat: new CombatStrategy()
+      .killHard($monster`The Nuge`)
+      .macro(new Macro().item($item`cigarette lighter`)),
     choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
     limit: { tries: 2, message: "Well This didn't work" },
   },
@@ -184,7 +186,7 @@ const Dome: Task[] = [
     acquire: [{ item: $item`disposable instant camera` }],
     completed: () => have($item`photograph of a dog`) || step("questL11Palindome") >= 3,
     do: $location`Inside the Palindome`,
-    outfit: { equip: $items`Talisman o' Namsilat`, modifier: "-combat" },
+    outfit: { equip: $items`Talisman o' Namsilat, June cleaver`, modifier: "-combat" },
     combat: new CombatStrategy()
       .banish(...$monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
       .macro(
@@ -199,7 +201,7 @@ const Dome: Task[] = [
     after: ["Palindome Dog"],
     completed: () => have(Item.get(7262)) || step("questL11Palindome") >= 3,
     do: $location`Inside the Palindome`,
-    outfit: { equip: $items`Talisman o' Namsilat`, modifier: "-combat" },
+    outfit: { equip: $items`Talisman o' Namsilat, June cleaver`, modifier: "-combat" },
     combat: new CombatStrategy()
       .banish(...$monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
       .kill(...$monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
@@ -214,7 +216,7 @@ const Dome: Task[] = [
         have($item`photograph of an ostrich egg`)) ||
       step("questL11Palindome") >= 3,
     do: $location`Inside the Palindome`,
-    outfit: { equip: $items`Talisman o' Namsilat`, modifier: "-combat" },
+    outfit: { equip: $items`Talisman o' Namsilat, June cleaver`, modifier: "-combat" },
     limit: { soft: 20 },
   },
   {

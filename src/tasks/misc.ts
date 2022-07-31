@@ -3,8 +3,10 @@ import {
   cliExecute,
   familiarEquippedEquipment,
   familiarWeight,
+  haveEffect,
   itemAmount,
   myBasestat,
+  myInebriety,
   myPrimestat,
   retrieveItem,
   retrievePrice,
@@ -23,7 +25,6 @@ import {
   $location,
   $monster,
   $skill,
-  Clan,
   get,
   getSaleValue,
   have,
@@ -219,10 +220,10 @@ export const MiscQuest: Quest = {
 
         const bestVotes = voteLocalPriorityArr.sort((a, b) => b[1] - a[1]);
         const firstInit = bestVotes[0][0];
-        const secondInit = bestVotes[1][0];
+        //const secondInit = bestVotes[1][0];
 
         visitUrl(
-          `choice.php?option=1&whichchoice=1331&g=${monsterVote}&local[]=${firstInit}&local[]=${secondInit}`
+          `choice.php?option=1&whichchoice=1331&g=${monsterVote}&local[]=${firstInit}&local[]=${firstInit}`
         );
       },
       limit: { tries: 1 },
@@ -329,6 +330,55 @@ export const MiscQuest: Quest = {
       outfit: { familiar: $familiar`Grey Goose` },
       limit: { tries: 1 },
       freeaction: true,
+    },
+    {
+      name: "Cleaver NC",
+      after: [],
+      priority: () => true,
+      completed: () => step("questL13Final") >= 0, // Stop after tower starts
+      ready: () => {
+        return have($item`June cleaver`) && get("_juneCleaverFightsLeft") === 0;
+      },
+      do: () => {
+        adv1($location`Noob Cave`, 0);
+        if (haveEffect($effect`Beaten Up`)) {
+          useSkill($skill`Tongue of the Walrus`);
+        }
+      },
+      outfit: (): OutfitSpec => {
+        return { equip: $items`June cleaver` };
+      },
+      choices: {
+        // June cleaver noncombats
+        1467: 3, // Poetic Justice
+        1468: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Aunts Not Ants
+        1469: 3, // Beware of Aligator
+        1470: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Teacher's Pet
+        1471: 1, // Lost & Found
+        1472: 2, // Summer Days
+        1473: () => (get("_juneCleaverSkips") < 5 ? 4 : 1), // Bath Time
+        1474: () => (get("_juneCleaverSkips") < 5 ? 4 : 3), // Delicious Sprouts
+        1475: 1, // Hypnotic Master
+      },
+      limit: { tries: 18 },
+    },
+    {
+      name: "Sweat Out Some Booze",
+      after: [],
+      priority: () => true,
+      ready: () =>
+        get("_sweatOutSomeBoozeUsed") < 3 &&
+        get("sweat") > 25 &&
+        have($item`designer sweatpants`) &&
+        myInebriety() > 2,
+      completed: () => get("_sweatOutSomeBoozeUsed") === 3,
+      do: () => {
+        useSkill($skill`Sweat Out Some Booze`);
+      },
+      outfit: { equip: $items`designer sweatpants` },
+      limit: { tries: 3 },
+      freeaction: true,
+      noadventures: true,
     },
   ],
 };

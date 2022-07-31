@@ -18,7 +18,7 @@ const Temple: Task[] = [
       step("questM16Temple") === 999,
     do: $location`The Spooky Forest`,
     choices: { 502: 2, 505: 2, 334: 1 },
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     limit: { soft: 10 },
   },
   {
@@ -27,7 +27,7 @@ const Temple: Task[] = [
     completed: () => have($item`Spooky Temple map`) || step("questM16Temple") === 999,
     do: $location`The Spooky Forest`,
     choices: { 502: 3, 506: 3, 507: 1, 334: 1 },
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     limit: { soft: 10 },
   },
   {
@@ -36,7 +36,7 @@ const Temple: Task[] = [
     completed: () => have($item`spooky sapling`) || step("questM16Temple") === 999,
     do: $location`The Spooky Forest`,
     choices: { 502: 1, 503: 3, 504: 3, 334: 1 },
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     limit: { soft: 10 },
   },
   {

@@ -179,7 +179,7 @@ export const LevelingQuest: Quest = {
         .killHard(),
       outfit: {
         familiar: $familiar`Frumious Bandersnatch`,
-        equip: $items`Greatest American Pants, familiar scrapbook`,
+        equip: $items`June cleaver, Greatest American Pants, familiar scrapbook`,
         modifier: "mainstat, 4exp, HP",
       },
       effects: $effects`Spirit of Peppermint`,
@@ -242,7 +242,7 @@ export const LevelingQuest: Quest = {
         .abort(), // error on everything except sausage goblin
       outfit: {
         modifier: "mainstat, 4exp",
-        equip: $items`Kramco Sausage-o-Matic™, makeshift garbage shirt, Pocket Professor memory chip`,
+        equip: $items`June cleaver, Kramco Sausage-o-Matic™, makeshift garbage shirt, Pocket Professor memory chip`,
         familiar: $familiar`Pocket Professor`,
       },
       limit: { tries: 1 },
@@ -288,7 +288,7 @@ export const LevelingQuest: Quest = {
       combat: new CombatStrategy().killHard(),
       outfit: {
         modifier: "mainstat, 4exp, monster level percent",
-        equip: $items`makeshift garbage shirt, unbreakable umbrella`,
+        equip: $items`June cleaver, makeshift garbage shirt, unbreakable umbrella`,
         familiar: $familiar`Machine Elf`,
       },
       limit: { tries: 5 },

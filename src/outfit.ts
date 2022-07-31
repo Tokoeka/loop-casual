@@ -258,7 +258,7 @@ export class Outfit {
 
     if (!this.modifier) {
       // Default outfit
-      this.equip($item`Fourth of May Cosplay Saber`);
+      this.equip($item`June cleaver`);
       if (
         totalTurnsPlayed() >= get("nextParanormalActivity") &&
         get("questPAGhost") === "unstarted"

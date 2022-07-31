@@ -1,5 +1,5 @@
 import { myLevel, visitUrl } from "kolmafia";
-import { $item, $location } from "libram";
+import { $item, $items, $location } from "libram";
 import { Quest, step } from "./structure";
 import { CombatStrategy } from "../combat";
 
@@ -52,7 +52,7 @@ export const McLargeHugeQuest: Quest = {
       after: ["Climb"],
       completed: () => step("questL08Trapper") >= 5,
       do: $location`Mist-Shrouded Peak`,
-      outfit: { modifier: "cold res 5min" },
+      outfit: { modifier: "cold res 5min", equip: $items`june cleaver` },
       combat: new CombatStrategy(true).kill(),
       limit: { tries: 4 },
     },

@@ -23,7 +23,7 @@ const Manor1: Task[] = [
     after: ["Start"],
     completed: () => step("questM20Necklace") >= 1,
     do: $location`The Haunted Kitchen`,
-    outfit: { modifier: "stench res, hot res" },
+    outfit: { modifier: "stench res, hot res", equip: $items`june cleaver` },
     choices: { 893: 2 },
     combat: new CombatStrategy().kill(),
     limit: { turns: 7 },
@@ -41,7 +41,7 @@ const Manor1: Task[] = [
     choices: { 875: 1, 900: 2, 1436: 2 },
     outfit: () => {
       return {
-        equip: have($item`government-issued eyeshade`) ? $items`government-issued eyeshade` : [],
+        equip: have($item`government-issued eyeshade`) ? $items`government-issued eyeshade, June cleaver` : $items`june cleaver`,
         modifier: "-combat",
       };
     },
@@ -98,7 +98,7 @@ const Manor2: Task[] = [
     completed: () => have($item`Lady Spookyraven's dancing shoes`) || step("questM21Dance") >= 2,
     do: $location`The Haunted Gallery`,
     choices: { 89: 6, 896: 1 }, // TODO: louvre
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     limit: { soft: 10 },
   },
   {
@@ -117,7 +117,7 @@ const Manor2: Task[] = [
     completed: () => have($item`Lady Spookyraven's powder puff`) || step("questM21Dance") >= 2,
     do: $location`The Haunted Bathroom`,
     choices: { 881: 1, 105: 1, 892: 1 },
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     combat: new CombatStrategy().kill($monster`cosmetics wraith`),
     limit: { soft: 10 },
   },
@@ -140,7 +140,7 @@ const Manor2: Task[] = [
     outfit: () => {
       if (myClass() === $class`Seal Clubber` && have($skill`Batter Up!`) && myFury() >= 5)
         return { equip: $items`Meat Tenderizer is Murder` };
-      else return { equip: $items`Pantsgiving` };
+      else return { equip: $items`Pantsgiving, June cleaver` };
     },
     delay: () => (have($item`Lord Spookyraven's spectacles`) ? 5 : 0),
     limit: { soft: 10 },
@@ -176,7 +176,7 @@ const ManorBasement: Task[] = [
     after: ["Ballroom Delay"],
     completed: () => step("questL11Manor") >= 1,
     do: $location`The Haunted Ballroom`,
-    outfit: { modifier: "-combat" },
+    outfit: { modifier: "-combat", equip: $items`june cleaver` },
     choices: { 90: 3, 106: 4, 921: 1 },
     limit: { soft: 10 },
   },

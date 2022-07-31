@@ -1,5 +1,5 @@
 import { myLevel, visitUrl } from "kolmafia";
-import { $location } from "libram";
+import { $items, $location } from "libram";
 import { Quest, step } from "./structure";
 
 export const MosquitoQuest: Quest = {
@@ -29,7 +29,8 @@ export const MosquitoQuest: Quest = {
       completed: () => step("questL02Larva") >= 1,
       do: $location`The Spooky Forest`,
       choices: { 502: 2, 505: 1, 334: 1 },
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat",
+    equip: $items`June Cleaver` },
       limit: { soft: 20 },
     },
     {

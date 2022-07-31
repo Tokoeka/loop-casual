@@ -162,7 +162,7 @@ const Pyramid: Task[] = [
     after: ["Open Pyramid"],
     completed: () => step("questL11Pyramid") >= 1,
     do: $location`The Upper Chamber`,
-    outfit: { modifier: "+combat" },
+    outfit: { modifier: "+combat", equip: $items`june cleaver` },
     limit: { turns: 6 },
   },
   {

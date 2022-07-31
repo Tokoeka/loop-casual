@@ -20,7 +20,7 @@ export const FriarQuest: Quest = {
       after: ["Start"],
       completed: () => have($item`box of birthday candles`) || step("questL06Friar") === 999,
       do: $location`The Dark Heart of the Woods`,
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat", equip: $items`June cleaver` },
       limit: { soft: 20 },
     },
     {
@@ -28,7 +28,7 @@ export const FriarQuest: Quest = {
       after: ["Start"],
       completed: () => have($item`dodecagram`) || step("questL06Friar") === 999,
       do: $location`The Dark Neck of the Woods`,
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat", equip: $items`June cleaver` },
       choices: { 1428: 2 },
       limit: { soft: 20 },
     },
@@ -37,7 +37,7 @@ export const FriarQuest: Quest = {
       after: ["Start"],
       completed: () => have($item`eldritch butterknife`) || step("questL06Friar") === 999,
       do: $location`The Dark Elbow of the Woods`,
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat", equip: $items`June cleaver` },
       limit: { soft: 20 },
     },
     {
@@ -92,7 +92,7 @@ export const OrganQuest: Quest = {
       },
       do: $location`Infernal Rackets Backstage`,
       limit: { soft: 30 },
-      outfit: { modifier: "-combat" },
+      outfit: { modifier: "-combat", equip: $items`June cleaver` },
     },
     {
       name: "Unicorn",
@@ -120,7 +120,7 @@ export const OrganQuest: Quest = {
       after: ["Start"],
       completed: () => have($item`observational glasses`),
       do: $location`The Laugh Floor`,
-      outfit: { modifier: "+combat" },
+      outfit: { modifier: "+combat", equip: $items`June cleaver` },
       combat: new CombatStrategy().kill(
         ...$monsters`Carbuncle Top, Larry of the Field of Signs, Victor the Insult Comic Hellhound`
       ),
