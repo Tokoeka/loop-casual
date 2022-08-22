@@ -34,7 +34,7 @@ const Diary: Task[] = [
   {
     name: "Buy Documents",
     after: ["Forest"],
-    completed: () => have($item`forged identification documents`) || step("questL11Black") >= 4,
+    completed: () => have($item`forged identification documents`) || step("questL11Black") >= 3,
     do: (): void => {
       visitUrl("woods.php");
       visitUrl("shop.php?whichshop=blackmarket");
@@ -46,7 +46,7 @@ const Diary: Task[] = [
   {
     name: "Diary",
     after: ["Buy Documents", "Misc/Unlock Beach"],
-    completed: () => step("questL11Black") >= 4,
+    completed: () => step("questL11Black") >= 3,
     do: $location`The Shore, Inc. Travel Agency`,
     choices: { 793: 1 },
     limit: { tries: 1 },

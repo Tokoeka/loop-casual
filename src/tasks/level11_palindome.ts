@@ -198,10 +198,10 @@ const Dome: Task[] = [
   },
   {
     name: "Palindome Dudes",
-    after: ["Palindome Dog"],
+    after: ["Palindome Photos"],
     completed: () => have(Item.get(7262)) || step("questL11Palindome") >= 3,
     do: $location`Inside the Palindome`,
-    outfit: { equip: $items`Talisman o' Namsilat, June cleaver`, modifier: "-combat" },
+    outfit: { equip: $items`Talisman o' Namsilat, June cleaver` },
     combat: new CombatStrategy()
       .banish(...$monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
       .kill(...$monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
@@ -209,7 +209,7 @@ const Dome: Task[] = [
   },
   {
     name: "Palindome Photos",
-    after: ["Palindome Dudes"],
+    after: ["Palindome Dog"],
     completed: () =>
       (have($item`photograph of a red nugget`) &&
         have($item`photograph of God`) &&
@@ -221,7 +221,7 @@ const Dome: Task[] = [
   },
   {
     name: "Alarm Gem",
-    after: ["Palindome Photos"],
+    after: ["Palindome Dudes"],
     completed: () => step("questL11Palindome") >= 3,
     do: () => {
       if (have(Item.get(7262))) use(Item.get(7262));
