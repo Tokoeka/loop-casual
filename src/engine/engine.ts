@@ -1,6 +1,6 @@
 import { Location, Monster, myAdventures } from "kolmafia";
 import { Task } from "./task";
-import { $effect, $familiar, $item, $skill, have, PropertiesManager } from "libram";
+import { $effect, $familiar, $item, $skill, get, have, PropertiesManager } from "libram";
 import { CombatActions, MyActionDefaults } from "./combat";
 import { Engine as BaseEngine, CombatResources, CombatStrategy, Outfit } from "grimoire-kolmafia";
 import { applyEffects } from "./moods";
@@ -70,7 +70,8 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
     debug(`Executing ${task.name}`, "blue");
     this.checkLimits(task);
     super.execute(task);
-    if (have($effect`Beaten Up`)) throw "Fight was lost; stop.";
+    if (have($effect`Beaten Up`) && get("lastAdventure") !== "Poetic Justice") throw "Fight was lost; stop.";
+    else if(have($effect`Beaten Up`)) useSkill($skill`Tongue of the Walrus`);
     if (task.completed()) {
       debug(`${task.name} completed!`, "blue");
     } else {
@@ -193,16 +194,16 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
       1107: 1, // tennis ball
       1340: 3, // Is There A Doctor In The House?
       1341: 1, // Cure her poison
-      // June cleaver noncombats
-      1467: 1,
-      1468: 1,
-      1469: 2,
-      1470: 2,
-      1471: 1,
-      1472: 2,
-      1473: 2,
-      1474: 2,
-      1475: 1,
+      /* // June cleaver noncombats
+      1467: 3, // Poetic Justice
+      1468: 2, // Aunts Not Ants
+      1469: 3, // Beware of Aligator
+      1470: 2, // Teacher's Pet
+      1471: 1, // Lost & Found
+      1472: 2, // Summer Days
+      1473: 1, // Bath Time
+      1474: 3, // Delicious Sprouts
+      1475: 1, // Hypnotic Master */
     });
   }
 }

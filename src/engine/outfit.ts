@@ -67,10 +67,11 @@ export function equipDefaults(outfit: Outfit): void {
 
   if (!outfit.modifier) {
     // Default outfit
-    outfit.equip($item`Fourth of May Cosplay Saber`);
+    outfit.equip($item`June Cleaver`);
     if (totalTurnsPlayed() >= get("nextParanormalActivity") && get("questPAGhost") === "unstarted")
       outfit.equip($item`protonic accelerator pack`);
     outfit.equip($item`vampyric cloake`);
+    outfit.equip($item`designer sweatpants`);
     if (myBasestat($stat`mysticality`) >= 25) outfit.equip($item`Mr. Cheeng's spectacles`);
   }
 
