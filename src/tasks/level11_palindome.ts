@@ -14,8 +14,9 @@ import {
   Macro,
   uneffect,
 } from "libram";
-import { Quest, step, Task } from "./structure";
-import { CombatStrategy } from "../combat";
+import { Quest, Task } from "../engine/task";
+import { CombatStrategy } from "../engine/combat";
+import { step } from "grimoire-kolmafia";
 
 function shenItem(item: Item) {
   return (
@@ -156,9 +157,9 @@ const Zepplin: Task[] = [
       .macro((): Macro => {
         if (get("_glarkCableUses") < 5) return new Macro().tryItem($item`glark cable`);
         else return new Macro();
-      }, ...$monsters`man with the red buttons, red skeleton, red butler, Red Fox`)
-      .banish(...$monsters`Red Herring, Red Snapper`)
-      .kill(...$monsters`man with the red buttons, red skeleton, red butler, Red Fox`),
+      }, $monsters`man with the red buttons, red skeleton, red butler, Red Fox`)
+      .banish($monsters`Red Herring, Red Snapper`)
+      .kill($monsters`man with the red buttons, red skeleton, red butler, Red Fox`),
     limit: { soft: 15 },
   },
 ];
@@ -187,12 +188,12 @@ const Dome: Task[] = [
     do: $location`Inside the Palindome`,
     outfit: { equip: $items`Talisman o' Namsilat, June cleaver`, modifier: "-combat" },
     combat: new CombatStrategy()
-      .banish(...$monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
+      .banish($monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
       .macro(
         new Macro().item($item`disposable instant camera`),
-        ...$monsters`Bob Racecar, Racecar Bob`
+        $monsters`Bob Racecar, Racecar Bob`
       )
-      .kill(...$monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
+      .kill($monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
     limit: { soft: 20 },
   },
   {
@@ -202,8 +203,8 @@ const Dome: Task[] = [
     do: $location`Inside the Palindome`,
     outfit: { equip: $items`Talisman o' Namsilat, June cleaver` },
     combat: new CombatStrategy()
-      .banish(...$monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
-      .kill(...$monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
+      .banish($monsters`Evil Olive, Flock of Stab-bats, Taco Cat, Tan Gnat`)
+      .kill($monsters`Bob Racecar, Racecar Bob, Drab Bard, Remarkable Elba Kramer`),
     limit: { soft: 20 },
   },
   {
@@ -267,7 +268,8 @@ export const PalindomeQuest: Quest = {
       },
       outfit: { equip: $items`Talisman o' Namsilat, Mega Gem` },
       choices: { 131: 1 },
-      combat: new CombatStrategy(true).kill(),
+      boss: true,
+      combat: new CombatStrategy().kill(),
       limit: { tries: 1 },
     },
   ],

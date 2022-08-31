@@ -12,7 +12,6 @@ module.exports = {
     // Define files webpack will emit, does not need to correspond 1:1 with every typescript file
     // You need an emitted file for each entrypoint into your code, e.g. the main script and the ccs or ccs consult script it calls
     loopcasual: "./src/main.ts",
-    "loopcasual-combat": "./src/combat.ts",
     casualAscend: "./src/gash-hop.ts",
     aftercasual: "./src/aftercasual.ts",
   },

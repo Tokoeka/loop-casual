@@ -1,7 +1,8 @@
 import { myLevel, visitUrl } from "kolmafia";
 import { $item, $items, $location } from "libram";
-import { Quest, step } from "./structure";
-import { CombatStrategy } from "../combat";
+import { Quest } from "../engine/task";
+import { CombatStrategy } from "../engine/combat";
+import { step } from "grimoire-kolmafia";
 
 export const McLargeHugeQuest: Quest = {
   name: "McLargeHuge",
@@ -52,8 +53,9 @@ export const McLargeHugeQuest: Quest = {
       after: ["Climb"],
       completed: () => step("questL08Trapper") >= 5,
       do: $location`Mist-Shrouded Peak`,
-      outfit: { modifier: "cold res 5min", equip: $items`june cleaver` },
-      combat: new CombatStrategy(true).kill(),
+      outfit: { modifier: "cold res 5min", equip: $items`June Cleaver` },
+      boss: true,
+      combat: new CombatStrategy().kill(),
       limit: { tries: 4 },
     },
     {
