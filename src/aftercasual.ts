@@ -1,13 +1,18 @@
 import {
   adv1,
   cliExecute,
+  closetAmount,
   equip,
+  itemAmount,
   mallPrice,
   myAscensions,
   mySign,
   myTurncount,
+  print,
+  putCloset,
   retrieveItem,
   runChoice,
+  takeCloset,
   toInt,
   use,
   useFamiliar,
@@ -23,6 +28,7 @@ import {
   $slot,
   AsdonMartin,
   get,
+  have,
   Macro,
   set,
 } from "libram";
@@ -32,6 +38,7 @@ cliExecute(`refresh all`);
 if (get(`_feastUsed`) === 0) {
   cliExecute(`call login.ash`);
 }
+let duped = $item`none`;
 
 if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscensions()) {
   useFamiliar($familiar`Machine Elf`);
@@ -43,10 +50,19 @@ if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscen
     };
   });
   const best = dupeVals.sort((a, b) => b.value - a.value)[0];
+  let closet = false;
+  duped = best.dupeIt
   set(`choiceAdventure1119`, 4);
   set(`choiceAdventure1125`, `1&iid=${toInt(best.dupeIt)}`);
+  if (itemAmount(best.dupeIt) === 0 && closetAmount(best.dupeIt) > 0) {
+    takeCloset(best.dupeIt, 1);
+    closet = true;
+  }
   while (get(`lastDMTDuplication`) < myAscensions()) {
     adv1($location`The Deep Machine Tunnels`);
+  }
+  if (closet) {
+    putCloset(best.dupeIt, 2);
   }
 }
 
@@ -61,6 +77,7 @@ if (get(`_questESp`) === "") {
   if (
     [
       `questESpEVE`,
+      `questESpClipper`,
       `questESpFakeMedium`,
       `questESpGore`,
       `questESpOutOfOrder`,
@@ -104,3 +121,5 @@ if (AsdonMartin.installed()) {
 }
 
 use($item`cold medicine cabinet`);
+
+print(`We duped a ${duped}`);
