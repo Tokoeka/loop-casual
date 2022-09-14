@@ -1,3 +1,4 @@
+import { OutfitSpec } from "grimoire-kolmafia";
 import {
   bjornifyFamiliar,
   buy,
@@ -40,7 +41,7 @@ export interface Resource {
   name: string;
   available: () => boolean;
   prepare?: () => void;
-  equip?: Item | Familiar | (Item | Familiar)[];
+  equip?: Item | Familiar | Item[] | OutfitSpec;
   chance?: () => number;
 }
 
@@ -156,10 +157,11 @@ export function unusedBanishes(to_banish: Monster[]): BanishSource[] {
   );
 
   // Record monsters that still need to be banished, and the banishes used
+  const not_yet_banished: Monster[] = [];
   to_banish.forEach((monster) => {
     const banished_with = already_banished.get(monster);
     if (banished_with === undefined) {
-      to_banish.push(monster);
+      not_yet_banished.push(monster);
     } else {
       used_banishes.add(banished_with);
       // Map strange banish tracking to our resources
@@ -169,9 +171,9 @@ export function unusedBanishes(to_banish: Monster[]): BanishSource[] {
         used_banishes.add($skill`Reflex Hammer`);
     }
   });
-  if (to_banish.length === 0) return []; // All monsters banished.
+  if (not_yet_banished.length === 0) return []; // All monsters banished.
 
-  debug(`Banish targets: ${to_banish.join(", ")}`);
+  debug(`Banish targets: ${not_yet_banished.join(", ")}`);
   debug(`Banishes used: ${Array.from(used_banishes).join(", ")}`);
   return banishSources.filter((banish) => banish.available() && !used_banishes.has(banish.do));
 }
@@ -288,16 +290,18 @@ export const wandererSources: WandererSource[] = [
       familiarWeight($familiar`Grey Goose`) >= 6 &&
       itemAmount($item`teacher's pen`) >= 3 &&
       getKramcoWandererChance() === 1,
-    equip: [
-      $item`Kramco Sausage-o-Matic™`,
-      $familiar`Grey Goose`,
-      // Get 11 famexp at the end of the fight, to maintain goose weight
-      $item`yule hatchet`,
-      $item`grey down vest`,
-      $item`teacher's pen`,
-      $item`teacher's pen`,
-      $item`teacher's pen`,
-    ],
+    equip: {
+      familiar: $familiar`Grey Goose`,
+      equip: [
+        $item`Kramco Sausage-o-Matic™`,
+        // Get 11 famexp at the end of the fight, to maintain goose weight
+        $item`yule hatchet`,
+        $item`grey down vest`,
+        $item`teacher's pen`,
+        $item`teacher's pen`,
+        $item`teacher's pen`,
+      ],
+    },
     monsters: [$monster`sausage goblin`],
     chance: () => getKramcoWandererChance(),
     macro: new Macro().trySkill($skill`Emit Matter Duplicating Drones`),
@@ -406,7 +410,10 @@ export const runawaySources: RunawaySource[] = [
         ensureEffect($effect`Ode to Booze`, 5);
       }
     },
-    equip: [runawayFamiliar, ...familiarGear, $item`iFlail`],
+    equip: {
+      familiar: runawayFamiliar,
+      equip: [...familiarGear, $item`iFlail`],
+    },
     do: new Macro().runaway(),
     chance: () => 1,
     banishes: false,
@@ -428,7 +435,10 @@ export const runawaySources: RunawaySource[] = [
         ensureEffect($effect`Ode to Booze`, 5);
       }
     },
-    equip: [runawayFamiliar, ...familiarGear, $item`iFlail`, $item`familiar scrapbook`],
+    equip: {
+      familiar: runawayFamiliar,
+      equip: [...familiarGear, $item`iFlail`, $item`familiar scrapbook`],
+    },
     do: new Macro().runaway(),
     chance: () => 1,
     banishes: false,
@@ -447,7 +457,7 @@ export const runawaySources: RunawaySource[] = [
       have($item`glob of Blank-Out`) ||
       (mallPrice($item`bottle of Blank-Out`) < 5 * runawayValue && !get("_blankoutUsed")),
     do: new Macro().tryItem($item`glob of Blank-Out`),
-    chance: () => (get("_navelRunaways") < 3 ? 1 : 0.2),
+    chance: () => 1,
     banishes: false,
   },
   {

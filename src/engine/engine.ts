@@ -1,4 +1,4 @@
-import { Location, Monster, myAdventures } from "kolmafia";
+import { cliExecute, Location, Monster, myAdventures } from "kolmafia";
 import { Task } from "./task";
 import { $effect, $familiar, $item, $skill, get, have, PropertiesManager } from "libram";
 import { CombatActions, MyActionDefaults } from "./combat";
@@ -14,7 +14,7 @@ import {
   WandererSource,
   wandererSources,
 } from "./resources";
-import { createOutfit, equipDefaults, equipFirst, equipInitial, equipUntilCapped } from "./outfit";
+import { equipDefaults, equipFirst, equipInitial, equipUntilCapped, fixFoldables } from "./outfit";
 
 type ActiveTask = Task & {
   wanderer?: WandererSource;
@@ -51,7 +51,7 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
       (task) =>
         this.hasDelay(task) &&
         this.available(task) &&
-        createOutfit(task).canEquip(wanderer?.equip ?? [])
+        this.createOutfit(task).canEquip(wanderer?.equip ?? [])
     );
     if (wanderer !== undefined && delay_burning !== undefined) {
       return { ...delay_burning, wanderer: wanderer };
@@ -94,7 +94,6 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
 
     if (task.freeaction) {
       // Prepare only as requested by the task
-      applyEffects(outfit.modifier ?? "", task.effects || []);
       return;
     }
 
@@ -156,9 +155,6 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
       equipDefaults(outfit);
     }
 
-    // Prepare mood
-    applyEffects(outfit.modifier ?? "", task.effects || []);
-
     // Kill wanderers
     for (const wanderer of wanderers) {
       combat.action("killHard", wanderer.monsters);
@@ -173,8 +169,25 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
     }
   }
 
+  createOutfit(task: Task): Outfit {
+    const spec = typeof task.outfit === "function" ? task.outfit() : task.outfit;
+    const outfit = new Outfit();
+    if (spec !== undefined) outfit.equip(spec); // no error on failure
+    return outfit;
+  }
+
   dress(task: Task, outfit: Outfit): void {
-    super.dress(task, outfit);
+    try {
+      outfit.dress();
+    } catch {
+      // If we fail to dress, this is maybe just a mafia desync.
+      // So refresh our inventory and try again (once).
+      debug("Possible mafia desync detected; refreshing...");
+      cliExecute("refresh all");
+      outfit.dress({ forceUpdate: true });
+    }
+    fixFoldables(outfit);
+    applyEffects(outfit.modifier ?? "", task.effects || []);
 
     // HP/MP upkeep
     if (!task.freeaction) {
