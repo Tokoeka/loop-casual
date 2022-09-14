@@ -358,9 +358,9 @@ export const MiscQuest: Quest = {
         1469: 3, // Beware of Aligator
         1470: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Teacher's Pet
         1471: 1, // Lost & Found
-        1472: 2, // Summer Days
+        1472: 1, // Summer Days
         1473: () => (get("_juneCleaverSkips") < 5 ? 4 : 1), // Bath Time
-        1474: () => (get("_juneCleaverSkips") < 5 ? 4 : 3), // Delicious Sprouts
+        1474: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Delicious Sprouts
         1475: 1, // Hypnotic Master
       },
       limit: { tries: 18 },
