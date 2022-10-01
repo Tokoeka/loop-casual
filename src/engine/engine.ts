@@ -1,6 +1,16 @@
 import { cliExecute, Location, Monster, myAdventures } from "kolmafia";
 import { Task } from "./task";
-import { $effect, $familiar, $item, $skill, get, have, PropertiesManager } from "libram";
+import {
+  $effect,
+  $familiar,
+  $item,
+  $locations,
+  $skill,
+  get,
+  have,
+  Macro,
+  PropertiesManager,
+} from "libram";
 import { CombatActions, MyActionDefaults } from "./combat";
 import { Engine as BaseEngine, CombatResources, CombatStrategy, Outfit } from "grimoire-kolmafia";
 import { applyEffects } from "./moods";
@@ -15,6 +25,7 @@ import {
   wandererSources,
 } from "./resources";
 import { equipDefaults, equipFirst, equipInitial, equipUntilCapped, fixFoldables } from "./outfit";
+import { flyersDone } from "../tasks/level12";
 
 type ActiveTask = Task & {
   wanderer?: WandererSource;
@@ -100,6 +111,25 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
     // Prepare combat macro
     if (combat.getDefaultAction() === undefined) combat.action("ignore");
 
+    // Use rock-band flyers if needed (300 extra as a buffer for mafia tracking)
+    const blacklist = new Set<Location>($locations`Oil Peak`);
+    if (
+      have($item`rock band flyers`) &&
+      !flyersDone() &&
+      (!(task.do instanceof Location) || !blacklist.has(task.do)) &&
+      task.name !== "Misc/Protonic Ghost"
+    ) {
+      combat.macro(
+        new Macro().if_(
+          // Avoid sausage goblin (2104), ninja snowman assassin (1185), protagonist (160), quantum mechanic (223), voting monsters
+          "!hpbelow 50 && !monsterid 2104 && !monsterid 1185 &&!monsterid 160 && !monsterid 223 && !monsterid 2094 && !monsterid 2095 && !monsterid 2096 && !monsterid 2097 && !monsterid 2098",
+          new Macro().tryItem($item`rock band flyers`)
+        ),
+        undefined,
+        true
+      );
+    }
+
     if (wanderers.length === 0) {
       // Set up a banish if needed
       const banishSources = unusedBanishes(
@@ -158,6 +188,7 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
     // Kill wanderers
     for (const wanderer of wanderers) {
       combat.action("killHard", wanderer.monsters);
+      if (wanderer.macro) combat.macro(wanderer.macro, wanderer.monsters);
     }
     if (resources.has("killFree") && !task.boss) {
       // Upgrade normal kills to free kills if provided
