@@ -92,7 +92,7 @@ export function main(args = ""): void {
 	});
 
 	ascend(
-		$path`Unrestricted`,
+		$path`none`,
 		newClass,
 		Lifestyle.casual,
 		"knoll",
