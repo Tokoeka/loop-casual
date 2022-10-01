@@ -12,6 +12,7 @@ import {
   itemAmount,
   itemType,
   mallPrice,
+  min,
   myAdventures,
   myDaycount,
   myFullness,
@@ -93,7 +94,7 @@ export const DietQuest: Quest = {
       do: (): void => {
         cliExecute("numberology 69");
       },
-      limit: { tries: 4 },
+      limit: { tries: Math.min(5, get("skillLevel144")) },
       freeaction: true,
       noadventures: true,
     },
