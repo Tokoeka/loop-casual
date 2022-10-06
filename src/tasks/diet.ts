@@ -94,7 +94,7 @@ export const DietQuest: Quest = {
       do: (): void => {
         cliExecute("numberology 69");
       },
-      limit: { tries: Math.min(5, get("skillLevel144")) },
+      limit: { tries: 5 },
       freeaction: true,
       noadventures: true,
     },
