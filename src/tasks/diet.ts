@@ -98,7 +98,7 @@ export const DietQuest: Quest = {
 			ready: () => myAdventures() > 0 && Object.keys(reverseNumberology()).includes("69"),
 			do: (): void => {
 				if (myMp() === 0) {
-					acquire(1, $item`Doc Galaktik's Invigorating Tonic`);
+					acquire(1, $item`Doc Galaktik's Invigorating Tonic`, 100);
 					use($item`Doc Galaktik's Invigorating Tonic`);
 				}
 				cliExecute("numberology 69");
