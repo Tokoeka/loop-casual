@@ -79,7 +79,7 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
   public execute(task: ActiveTask): void {
     debug(``);
     debug(`Executing ${task.name}`, "blue");
-    this.checkLimits(task);
+    this.checkLimits({ ...task, limit: { ...task.limit, unready: false } }, () => true); // ignore unready for this initial check
     super.execute(task);
     if (have($effect`Beaten Up`) && get("lastAdventure") !== "Poetic Justice") throw "Fight was lost; stop.";
     else if(have($effect`Beaten Up`)) useSkill($skill`Tongue of the Walrus`);
@@ -218,7 +218,7 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
       outfit.dress({ forceUpdate: true });
     }
     fixFoldables(outfit);
-    applyEffects(outfit.modifier ?? "", task.effects || []);
+    applyEffects(outfit.modifier ?? "");
 
     // HP/MP upkeep
     if (!task.freeaction) {
