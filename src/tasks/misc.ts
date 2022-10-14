@@ -38,6 +38,7 @@ import {
 import { CombatStrategy } from "../engine/combat";
 import { Quest } from "../engine/task";
 import { OutfitSpec, step } from "grimoire-kolmafia";
+import "core-js/features/array/flat";
 
 const fallBotUpgradeLocs: Record<AutumnAton.Upgrade, Location[]> = {
 	leftarm1: $locations`The Stately Pleasure Dome, The Haunted Pantry`,
@@ -47,15 +48,15 @@ const fallBotUpgradeLocs: Record<AutumnAton.Upgrade, Location[]> = {
 	leftleg1: $locations`Cobb's Knob Kitchens, Cobb's Knob Barracks, The Batrat and Ratbat Burrow, The Dire Warren, The Haiku Dungeon, Noob Cave`,
 	periscope: $locations`The Oasis, The Penultimate Fantasy Airship`,
 	radardish: $locations`The Red Zeppelin, The Copperhead Club, The Castle in the Clouds in the Sky (Top Floor)`,
-	rightarm1: $locations`The Neverending Party, Pirates of the Garbage Barges, Barf Mountain, The Ice Hotel, The Haunted Kitchen`,
-	rightleg1: $locations`The Deep Dark Jungle, Twin Peak, The Overgrown Lot`,
+	rightleg1: $locations`Pirates of the Garbage Barges, Barf Mountain, The Ice Hotel, The Haunted Kitchen`,
+	rightarm1: $locations`The Deep Dark Jungle, Twin Peak, The Overgrown Lot`,
 };
 
 const upgradeOrder: AutumnAton.Upgrade[] = [
 	"leftleg1",
 	"rightleg1",
-	"rightarm1",
 	"leftarm1",
+	"rightarm1",
 	"cowcatcher",
 	"periscope",
 	"radardish",
@@ -422,7 +423,8 @@ export const MiscQuest: Quest = {
 				const target =
 					upgradeOrder
 						.filter((upgrade) => !currentUpgrades.includes(upgrade))
-						.flatMap((upgrade) => fallBotUpgradeLocs[upgrade])
+						.map((upgrade) => fallBotUpgradeLocs[upgrade])
+						.flat()
 						.find((location) => availableLocs.includes(location)) ??
 					$location`The Neverending Party`;
 				//const target = upgradeOrder.map((upgrade) => ({ upgrade, locations: fallBotUpgradeLocs[upgrade]})).find(({ upgrade, locations }) => !currentUpgrades.includes(upgrade) && locations.some((location) => availableLocs.includes(location)))?.locations.find((location) => availableLocs.includes(location));
