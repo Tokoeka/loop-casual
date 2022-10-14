@@ -48,7 +48,7 @@ const fallBotUpgradeLocs: Record<AutumnAton.Upgrade, Location[]> = {
 	leftleg1: $locations`Cobb's Knob Kitchens, Cobb's Knob Barracks, The Batrat and Ratbat Burrow, The Dire Warren, The Haiku Dungeon, Noob Cave`,
 	periscope: $locations`The Oasis, The Penultimate Fantasy Airship`,
 	radardish: $locations`The Red Zeppelin, The Copperhead Club, The Castle in the Clouds in the Sky (Top Floor)`,
-	rightleg1: $locations`Pirates of the Garbage Barges, Barf Mountain, The Ice Hotel, The Haunted Kitchen`,
+	rightleg1: $locations`The Neverending Party, Pirates of the Garbage Barges, Barf Mountain, The Ice Hotel, The Haunted Kitchen`,
 	rightarm1: $locations`The Deep Dark Jungle, Twin Peak, The Overgrown Lot`,
 };
 
