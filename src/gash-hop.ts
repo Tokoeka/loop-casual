@@ -5,6 +5,7 @@ import {
 	$item,
   $path,
 	ascend,
+	AsdonMartin,
 	Clan,
 	get,
 	Lifestyle,
@@ -100,4 +101,5 @@ export function main(args = ""): void {
 		$item`astral shirt`
 	);
 	NEP();
+	AsdonMartin.fillTo(700);
 }
