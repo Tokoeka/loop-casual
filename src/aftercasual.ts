@@ -42,7 +42,7 @@ let duped = $item`none`;
 
 if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscensions()) {
   useFamiliar($familiar`Machine Elf`);
-  const dupeItems = $items`very fancy whiskey, bottle of Greedy Dog, Daily Affirmation: Always be Collecting, huge Crimbo cookie, green-iced sweet roll, bottle of Race Car Red, warbear gyro, karma shawarma`;
+  const dupeItems = $items`chocomotive, cabooze, very fancy whiskey, bottle of Greedy Dog, Daily Affirmation: Always be Collecting, huge Crimbo cookie, green-iced sweet roll, bottle of Race Car Red, warbear gyro, karma shawarma`;
   const dupeVals = Array.from(dupeItems.values()).map((dupe) => {
     return {
       dupeIt: dupe,
@@ -121,6 +121,6 @@ if (AsdonMartin.installed()) {
   AsdonMartin.drive($effect`Driving Observantly`, 900);
 }
 
-use($item`cold medicine cabinet`);
+//use($item`cold medicine cabinet`);
 
 print(`We duped a ${duped}`);
