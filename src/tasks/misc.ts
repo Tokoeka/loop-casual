@@ -375,7 +375,7 @@ export const MiscQuest: Quest = {
 				}
 			},
 			outfit: (): OutfitSpec => {
-				return { equip: $items`June cleaver` };
+				return { equip: $items`June cleaver, greatest american pants` };
 			},
 			choices: {
 				// June cleaver noncombats
