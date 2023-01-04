@@ -1,4 +1,4 @@
-import { print, runChoice, visitUrl } from "kolmafia";
+import { print, runChoice, use, visitUrl } from "kolmafia";
 import {
 	$class,
 	$classes,
@@ -78,7 +78,7 @@ export function main(args = ""): void {
 	Clan.join("Alliance From Heck");
 
 	prepareAscension({
-		workshed: `Asdon Martin keyfob`,
+		//workshed: `model train set`,
 		garden: `packet of thanksgarden seeds`,
 		eudora: `New-You Club Membership Form`,
 		chateau: {
@@ -101,5 +101,6 @@ export function main(args = ""): void {
 		$item`astral shirt`
 	);
 	NEP();
-	AsdonMartin.fillTo(700);
+	//AsdonMartin.fillTo(700);
+	use($item`model train set`);
 }
