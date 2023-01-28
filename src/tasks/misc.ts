@@ -1,6 +1,5 @@
 import {
 	adv1,
-	buy,
 	cliExecute,
 	expectedColdMedicineCabinet,
 	familiarEquippedEquipment,
@@ -46,6 +45,7 @@ import { Quest } from "../engine/task";
 import { OutfitSpec, step } from "grimoire-kolmafia";
 import { args } from "../main";
 import "core-js/features/array/flat";
+import { acquire } from "./diet";
 
 const fallBotUpgradeLocs: Record<AutumnAton.Upgrade, Location[]> = {
 	leftarm1: $locations`The Stately Pleasure Dome, The Haunted Pantry`,
@@ -589,7 +589,7 @@ export const DigitalQuest: Quest = {
 			after: ["Open"],
 			completed: () => Robortender.currentDrinks().includes($item`drive-by shooting`),
 			do: () => {
-				buy($item`drive-by shooting`, 1);
+				acquire(1, $item`drive-by shooting`, 50000);
 				Robortender.feed($item`drive-by shooting`);
 			},
 			limit: { tries: 1 },

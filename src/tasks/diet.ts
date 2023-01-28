@@ -163,7 +163,7 @@ function priceToCraft(item: Item) {
 	return total;
 }
 
-function acquire(qty: number, item: Item, maxPrice?: number, throwOnFail = true): number {
+export function acquire(qty: number, item: Item, maxPrice?: number, throwOnFail = true): number {
 	const startAmount = itemAmount(item);
 	const remaining = qty - startAmount;
 	if (maxPrice === undefined) throw `No price cap for ${item.name}.`;
