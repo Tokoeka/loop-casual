@@ -1,5 +1,6 @@
 import {
 	adv1,
+	buy,
 	cliExecute,
 	expectedColdMedicineCabinet,
 	familiarEquippedEquipment,
@@ -36,6 +37,7 @@ import {
 	getSaleValue,
 	have,
 	Macro,
+	Robortender,
 	set,
 	uneffect,
 } from "libram";
@@ -401,7 +403,7 @@ export const MiscQuest: Quest = {
 				}
 			},
 			outfit: (): OutfitSpec => {
-				return { equip: $items`June cleaver, greatest american pants` };
+				return { equip: $items`June cleaver, Greatest American Pants` };
 			},
 			choices: {
 				// June cleaver noncombats
@@ -583,13 +585,28 @@ export const DigitalQuest: Quest = {
 			freeaction: true,
 		},
 		{
+			name: "Robofeed",
+			after: ["Open"],
+			completed: () => Robortender.currentDrinks().includes($item`drive-by shooting`),
+			do: () => {
+				buy($item`drive-by shooting`, 1);
+				Robortender.feed($item`drive-by shooting`);
+			},
+			limit: { tries: 1 },
+			freeaction: true,
+		},
+		{
 			name: "Fungus",
 			after: ["Open"],
 			completed: () => getScore() >= 10000,
 			ready: () => get("8BitColor", "black") === "red",
 			// eslint-disable-next-line libram/verify-constants
 			do: $location`The Fungus Plains`,
-			outfit: { modifier: "meat", equip: $items`continuum transfunctioner` },
+			outfit: {
+				modifier: "meat",
+				equip: $items`continuum transfunctioner`,
+				familiar: $familiar`Robortender`,
+			},
 			combat: new CombatStrategy().kill(),
 			limit: { tries: 21 },
 			delay: 5,
@@ -601,7 +618,11 @@ export const DigitalQuest: Quest = {
 			ready: () => get("8BitColor", "black") === "black",
 			// eslint-disable-next-line libram/verify-constants
 			do: $location`Vanya's Castle`,
-			outfit: { modifier: "init", equip: $items`continuum transfunctioner` },
+			outfit: {
+				modifier: "init",
+				equip: $items`continuum transfunctioner`,
+				familiar: $familiar`Oily Woim`,
+			},
 			combat: new CombatStrategy().kill(),
 			limit: { tries: 21 },
 			delay: 10,
