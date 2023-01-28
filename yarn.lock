@@ -1584,11 +1584,6 @@ core-js@^3.16.4, core-js@^3.21.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
   integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
 
-core-js@^3.25.5:
-  version "3.25.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.5.tgz#e86f651a2ca8a0237a5f064c2fe56cef89646e27"
-  integrity sha512-nbm6eZSjm+ZuBQxCUPQKQCoUEfFOXjUZ8dTTyikyKaWrTYmAVbykQfwsKE5dBK88u3QCkCrzsx/PPlKfhsvgpw==
-
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -2205,10 +2200,10 @@ kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kolmafia@^5.26888.0:
-  version "5.26888.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.26888.0.tgz#2099ea1ecf7d37fdc9b2248e627f9738fcbd19cb"
-  integrity sha512-GRVTzXEwKEH84g6zkC7t2L7K4kRwLCVUKEo+HcBv++hciiwduvwH8crdQwsi7gnYjEYqy59YYhRbROxEyxtYGw==
+kolmafia@^5.26781.0:
+  version "5.27112.0"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27112.0.tgz#22ed3b6dafacbdb2612d3e241661a2960402de15"
+  integrity sha512-VqgkPUVvPQFnbGU7D/LYXj5pM/XWyRIxXZyHiPU6Ve3bXbRnSrisjsjk1UUuCVb0o0ghkbCVP0zITZbp8PJrHA==
 
 levn@^0.4.1:
   version "0.4.1"
