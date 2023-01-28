@@ -1675,10 +1675,10 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
-eslint-plugin-libram@^0.2.25:
-  version "0.2.25"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-libram/-/eslint-plugin-libram-0.2.25.tgz#c2a3dc767f1e392be608901a9248036f70714354"
-  integrity sha512-lFYasWDh+ImR4Cyv3rv1wr15X9AznHHg9dWm+8AqQnrq6QKnw9N0zoeJ9+oqrUPk7aaD9qm6NqCVux4045zaAg==
+eslint-plugin-libram@^0.2.27:
+  version "0.2.27"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-libram/-/eslint-plugin-libram-0.2.27.tgz#d52085636e6a5de475ec50506aa2c12b62d51c47"
+  integrity sha512-51NQsDJqjfkeBYkoLsYcW5DGyp8BsSGPIsGoLMGxfl2RyYAIIaBaCHbn/pjQI4M0iWQNy+rGtoC0UZuzkwhr8g==
   dependencies:
     html-entities "^2.3.2"
     requireindex "~1.1.0"
@@ -2200,10 +2200,10 @@ kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kolmafia@^5.26781.0:
-  version "5.27112.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27112.0.tgz#22ed3b6dafacbdb2612d3e241661a2960402de15"
-  integrity sha512-VqgkPUVvPQFnbGU7D/LYXj5pM/XWyRIxXZyHiPU6Ve3bXbRnSrisjsjk1UUuCVb0o0ghkbCVP0zITZbp8PJrHA==
+kolmafia@^5.27130.0:
+  version "5.27130.0"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27130.0.tgz#6b247c994370285bdc6d7c906544802fe2f87c4f"
+  integrity sha512-QogLU6DfXhdTRdaS768r6Rle7fXs3fGHepW7tXg0EKFZF+Bn881pgv7GXuvHyxafJKF2gTxjVnnanlbrBKNrhQ==
 
 levn@^0.4.1:
   version "0.4.1"
@@ -2213,10 +2213,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libram@^0.7.6:
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/libram/-/libram-0.7.6.tgz#e63cff60d4d0ffc54f40280da8e751ce41245d56"
-  integrity sha512-urkfZ/jyk5M3/0Xe503W3GF/Ay8cCXTAivhTx8YwYfdtcW5Y9E+7G3K3GiKjgbKvQ+OFcCb9KMRjc6tAlVSWlQ==
+libram@^0.7.10:
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/libram/-/libram-0.7.10.tgz#42f86600af1f11723e6eeed5d83905bebf49311f"
+  integrity sha512-B4pv66ISaWX94MdT6d5JN57LA2Qx4tHjGqcw2fSfN2fs/krfVgOE8SDgTtGDUOxXGhDlBIyhnStu1EsPvl9bIw==
   dependencies:
     "@babel/runtime-corejs3" "^7.17.2"
     core-js "^3.21.0"
