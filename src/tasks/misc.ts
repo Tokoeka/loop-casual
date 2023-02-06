@@ -1,6 +1,7 @@
 import {
 	adv1,
 	cliExecute,
+	equip,
 	expectedColdMedicineCabinet,
 	familiarEquippedEquipment,
 	familiarWeight,
@@ -580,6 +581,8 @@ export const DigitalQuest: Quest = {
 				runChoice(1);
 				runChoice(1);
 				runChoice(1);
+				equip($item`continuum transfunctioner`);
+				set("8BitColor", "black");
 			},
 			limit: { tries: 1 },
 			freeaction: true,
@@ -597,7 +600,7 @@ export const DigitalQuest: Quest = {
 		},
 		{
 			name: "Fungus",
-			after: ["Open"],
+			after: ["Open", "Robofeed"],
 			completed: () => getScore() >= 10000,
 			ready: () => get("8BitColor", "black") === "red",
 			// eslint-disable-next-line libram/verify-constants

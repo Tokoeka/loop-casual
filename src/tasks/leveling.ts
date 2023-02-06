@@ -154,6 +154,8 @@ export const LevelingQuest: Quest = {
 						.tryItem($item`Rain-Doh indigo cup`)
 						.trySkill($skill`Entangling Noodles`)
 						.trySkill($skill`Frost Bite`)
+						.attack()
+						.repeat()
 				)
 				.kill(),
 			outfit: {
@@ -168,7 +170,7 @@ export const LevelingQuest: Quest = {
 		{
 			name: "Chateau",
 			after: [],
-			ready: () => ChateauMantegna.have(),
+			ready: () => ChateauMantegna.have() && myLevel() >= 7,
 			completed: () => get("timesRested") >= totalFreeRests() || myLevel() >= args.levelto,
 			prepare: (): void => {
 				// Set the chateau to give the proper stats

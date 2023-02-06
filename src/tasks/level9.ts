@@ -1,169 +1,169 @@
-import { buy, cliExecute, floor, Item, itemAmount, mallPrice, myLevel, use, visitUrl } from "kolmafia";
+import { cliExecute, floor, itemAmount, myLevel, use, visitUrl } from "kolmafia";
 import {
-  $effect,
-  $effects,
-  $item,
-  $items,
-  $location,
-  $monster,
-  $skill,
-  get,
-  have,
-  Macro,
-  SourceTerminal,
+	$effect,
+	$effects,
+	$item,
+	$items,
+	$location,
+	$monster,
+	$skill,
+	get,
+	have,
+	Macro,
+	SourceTerminal,
 } from "libram";
 import { Quest, Task } from "../engine/task";
 import { CombatStrategy } from "../engine/combat";
 import { OutfitSpec, step } from "grimoire-kolmafia";
 
 const ABoo: Task[] = [
-  {
-    name: "ABoo Start",
-    after: ["Start Peaks"],
-    completed: () =>
-      $location`A-Boo Peak`.noncombatQueue.includes("Faction Traction = Inaction") ||
-      get("booPeakProgress") < 50,
-    do: $location`A-Boo Peak`,
-    limit: { tries: 1 },
-  },
-  {
-    name: "ABoo Clues",
-    after: ["ABoo Start"],
-    acquire: [
-      { item: $item`yellow rocket`, useful: () => !have($effect`Everything Looks Yellow`) },
-    ],
-    priority: () => get("lastCopyableMonster") === $monster`toothy sklelton`, // After Defiled Nook
-    completed: () => itemAmount($item`A-Boo clue`) * 30 >= get("booPeakProgress"),
-    prepare: () => {
-      if (!SourceTerminal.isCurrentSkill($skill`Duplicate`))
-        SourceTerminal.educate([$skill`Duplicate`, $skill`Digitize`]);
-    },
-    do: $location`A-Boo Peak`,
-    outfit: (): OutfitSpec => {
-      if (
-        $location`A-Boo Peak`.turnsSpent === 0 &&
-        $location`Twin Peak`.turnsSpent === 0 &&
-        $location`Oil Peak`.turnsSpent === 0 &&
-        have($skill`Comprehensive Cartography`)
-      ) {
-        // Prepare for Ghostly Memories (1430)
-        return { modifier: "spooky res, cold res, HP" };
-      } else {
-        return {
-          modifier: "item 667max",
-          equip: $items`A Light that Never Goes Out`,
-          skipDefaults: true,
-        };
-      }
-    },
-    effects: $effects`Merry Smithsness`,
-    combat: new CombatStrategy()
-      .macro((): Macro => {
-        if (get("lastCopyableMonster") === $monster`toothy sklelton`) {
-          return new Macro()
-            .trySkill($skill`Feel Nostalgic`)
-            .trySkill(`Duplicate`)
-            .tryItem(`yellow rocket`);
-        } else {
-          return new Macro()
-            .trySkill($skill`Feel Envy`)
-            .trySkill($skill`Saucegeyser`)
-            .repeat();
-        }
-      })
-      .killHard(),
-    choices: { 611: 1, 1430: 1 },
-    limit: { tries: 4 },
-  },
-  {
-    name: "ABoo Horror",
-    after: ["ABoo Clues"],
-    ready: () => have($item`A-Boo clue`),
-    completed: () => get("booPeakProgress") === 0,
-    prepare: () => {
-      use($item`A-Boo clue`);
-    },
-    do: $location`A-Boo Peak`,
-    outfit: { modifier: "spooky res, cold res, HP" },
-    choices: { 611: 1 },
-    limit: { tries: 4 },
-  },
-  {
-    name: "ABoo Peak",
-    after: ["ABoo Horror"],
-    completed: () => get("booPeakLit"),
-    do: $location`A-Boo Peak`,
-    limit: { tries: 1 },
-  },
+	{
+		name: "ABoo Start",
+		after: ["Start Peaks"],
+		completed: () =>
+			$location`A-Boo Peak`.noncombatQueue.includes("Faction Traction = Inaction") ||
+			get("booPeakProgress") < 50,
+		do: $location`A-Boo Peak`,
+		limit: { tries: 1 },
+	},
+	{
+		name: "ABoo Clues",
+		after: ["ABoo Start"],
+		acquire: [
+			{ item: $item`yellow rocket`, useful: () => !have($effect`Everything Looks Yellow`) },
+		],
+		priority: () => get("lastCopyableMonster") === $monster`toothy sklelton`, // After Defiled Nook
+		completed: () => itemAmount($item`A-Boo clue`) * 30 >= get("booPeakProgress"),
+		prepare: () => {
+			if (!SourceTerminal.isCurrentSkill($skill`Duplicate`))
+				SourceTerminal.educate([$skill`Duplicate`, $skill`Digitize`]);
+		},
+		do: $location`A-Boo Peak`,
+		outfit: (): OutfitSpec => {
+			if (
+				$location`A-Boo Peak`.turnsSpent === 0 &&
+				$location`Twin Peak`.turnsSpent === 0 &&
+				$location`Oil Peak`.turnsSpent === 0 &&
+				have($skill`Comprehensive Cartography`)
+			) {
+				// Prepare for Ghostly Memories (1430)
+				return { modifier: "spooky res, cold res, HP" };
+			} else {
+				return {
+					modifier: "item 667max",
+					equip: $items`A Light that Never Goes Out`,
+					skipDefaults: true,
+				};
+			}
+		},
+		effects: $effects`Merry Smithsness`,
+		combat: new CombatStrategy()
+			.macro((): Macro => {
+				if (get("lastCopyableMonster") === $monster`toothy sklelton`) {
+					return new Macro()
+						.trySkill($skill`Feel Nostalgic`)
+						.trySkill(`Duplicate`)
+						.tryItem(`yellow rocket`);
+				} else {
+					return new Macro()
+						.trySkill($skill`Feel Envy`)
+						.trySkill($skill`Saucegeyser`)
+						.repeat();
+				}
+			})
+			.killHard(),
+		choices: { 611: 1, 1430: 1 },
+		limit: { tries: 4 },
+	},
+	{
+		name: "ABoo Horror",
+		after: ["ABoo Clues"],
+		ready: () => have($item`A-Boo clue`),
+		completed: () => get("booPeakProgress") === 0,
+		prepare: () => {
+			use($item`A-Boo clue`);
+		},
+		do: $location`A-Boo Peak`,
+		outfit: { modifier: "spooky res, cold res, HP" },
+		choices: { 611: 1 },
+		limit: { tries: 4 },
+	},
+	{
+		name: "ABoo Peak",
+		after: ["ABoo Horror"],
+		completed: () => get("booPeakLit"),
+		do: $location`A-Boo Peak`,
+		limit: { tries: 1 },
+	},
 ];
 
 const Oil: Task[] = [
-  {
-    name: "Oil Kill",
-    after: ["Start Peaks"],
-    completed: () => get("oilPeakProgress") === 0,
-    do: $location`Oil Peak`,
-    outfit: { modifier: "ML", equip: $items`june cleaver` },
-    combat: new CombatStrategy().kill(),
-    limit: { tries: 6 },
-  },
-  {
-    name: "Oil Peak",
-    after: ["Oil Kill"],
-    completed: () => get("oilPeakLit"),
-    do: $location`Oil Peak`,
-    limit: { tries: 1 },
-  },
+	{
+		name: "Oil Kill",
+		after: ["Start Peaks"],
+		completed: () => get("oilPeakProgress") === 0,
+		do: $location`Oil Peak`,
+		outfit: { modifier: "ML", equip: $items`June cleaver` },
+		combat: new CombatStrategy().kill(),
+		limit: { tries: 6 },
+	},
+	{
+		name: "Oil Peak",
+		after: ["Oil Kill"],
+		completed: () => get("oilPeakLit"),
+		do: $location`Oil Peak`,
+		limit: { tries: 1 },
+	},
 ];
 
 const Twin: Task[] = [
-  {
-    name: "Twin Stench",
-    after: ["Start Peaks"],
-    priority: () => get("hasAutumnaton"),
-    completed: () => !!(get("twinPeakProgress") & 1),
-    do: () => {
-      use($item`rusty hedge trimmers`);
-    },
-    choices: { 606: 1, 607: 1 },
-    acquire: [{ item: $item`rusty hedge trimmers` }],
-    outfit: { modifier: "stench res 4min" },
-    limit: { tries: 1 },
-  },
-  {
-    name: "Twin Item",
-    after: ["Start Peaks"],
-    completed: () => !!(get("twinPeakProgress") & 2),
-    do: () => {
-      use($item`rusty hedge trimmers`);
-    },
-    choices: { 606: 2, 608: 1 },
-    acquire: [{ item: $item`rusty hedge trimmers` }],
-    outfit: { modifier: "item 50min, -outfit eldritch equipage" },
-    limit: { tries: 1 },
-  },
-  {
-    name: "Twin Oil",
-    after: ["Start Peaks"],
-    completed: () => !!(get("twinPeakProgress") & 4),
-    do: () => {
-      use($item`rusty hedge trimmers`);
-    },
-    choices: { 606: 3, 609: 1, 616: 1 },
-    acquire: [{ item: $item`rusty hedge trimmers` }, { item: $item`jar of oil` }],
-    limit: { tries: 1 },
-  },
-  {
-    name: "Twin Init",
-    after: ["Twin Stench", "Twin Item", "Twin Oil"],
-    completed: () => !!(get("twinPeakProgress") & 8),
-    do: () => {
-      use($item`rusty hedge trimmers`);
-    },
-    choices: { 606: 4, 610: 1, 1056: 1 },
-    acquire: [{ item: $item`rusty hedge trimmers` }],
-    limit: { tries: 1 },
-  },
+	{
+		name: "Twin Stench",
+		after: ["Start Peaks"],
+		priority: () => get("hasAutumnaton"),
+		completed: () => !!(get("twinPeakProgress") & 1),
+		do: () => {
+			use($item`rusty hedge trimmers`);
+		},
+		choices: { 606: 1, 607: 1 },
+		acquire: [{ item: $item`rusty hedge trimmers` }],
+		outfit: { modifier: "stench res 4min" },
+		limit: { tries: 1 },
+	},
+	{
+		name: "Twin Item",
+		after: ["Start Peaks"],
+		completed: () => !!(get("twinPeakProgress") & 2),
+		do: () => {
+			use($item`rusty hedge trimmers`);
+		},
+		choices: { 606: 2, 608: 1 },
+		acquire: [{ item: $item`rusty hedge trimmers` }],
+		outfit: { modifier: "item 50min, -outfit eldritch equipage" },
+		limit: { tries: 1 },
+	},
+	{
+		name: "Twin Oil",
+		after: ["Start Peaks"],
+		completed: () => !!(get("twinPeakProgress") & 4),
+		do: () => {
+			use($item`rusty hedge trimmers`);
+		},
+		choices: { 606: 3, 609: 1, 616: 1 },
+		acquire: [{ item: $item`rusty hedge trimmers` }, { item: $item`jar of oil` }],
+		limit: { tries: 1 },
+	},
+	{
+		name: "Twin Init",
+		after: ["Twin Stench", "Twin Item", "Twin Oil"],
+		completed: () => !!(get("twinPeakProgress") & 8),
+		do: () => {
+			use($item`rusty hedge trimmers`);
+		},
+		choices: { 606: 4, 610: 1, 1056: 1 },
+		acquire: [{ item: $item`rusty hedge trimmers` }],
+		limit: { tries: 1 },
+	},
 ];
 
 /* const bridgeExtenders: Map<Item[], number[]> = new Map<Item[], number[]>([[$items`snow boards, snow berries`, [2, 5]], [$items`Smut orc keepsake box`, [1, 5]], [$items`X, Bridge truss`, [23, 15]]]);
@@ -190,54 +190,58 @@ export function bestExtender() {
 } */
 
 export const ChasmQuest: Quest = {
-  name: "Orc Chasm",
-  tasks: [
-    {
-      name: "Start",
-      after: ["Toot/Finish"],
-      priority: () => get("hasAutumnaton"),
-      ready: () => myLevel() >= 9,
-      completed: () => step("questL09Topping") !== -1,
-      do: () => visitUrl("council.php"),
-      limit: { tries: 1 },
-      freeaction: true,
-    },
-    {
-      name: "Bridge",
-      after: ["Start"],
-      priority: () => get("hasAutumnaton"),
-      completed: () => step("questL09Topping") >= 1,
-      do: (): void => {
-        if (have($item`fish hatchet`)) use($item`fish hatchet`);
-        visitUrl(`place.php?whichplace=orc_chasm&action=bridge${get("chasmBridgeProgress")}`); // use existing materials
-        const count = floor((34 - get("chasmBridgeProgress")) / 5);
-        if (count <= 0) return;
-        cliExecute(`acquire ${count} snow boards`);
-        visitUrl(`place.php?whichplace=orc_chasm&action=bridge${get("chasmBridgeProgress")}`);
-      },
-      acquire: [{ item: $item`snow berries`, num: 12 }],
-      limit: { tries: 1 },
-      freeaction: true,
-    },
-    {
-      name: "Start Peaks",
-      after: ["Bridge"],
-      priority: () => get("hasAutumnaton"),
-      completed: () => step("questL09Topping") >= 2,
-      do: () => visitUrl("place.php?whichplace=highlands&action=highlands_dude"),
-      limit: { tries: 1 },
-      freeaction: true,
-    },
-    ...ABoo,
-    ...Oil,
-    ...Twin,
-    {
-      name: "Finish",
-      after: ["ABoo Peak", "Oil Peak", "Twin Init"],
-      completed: () => step("questL09Topping") === 999,
-      do: () => visitUrl("place.php?whichplace=highlands&action=highlands_dude"),
-      limit: { tries: 1 },
-      freeaction: true,
-    },
-  ],
+	name: "Orc Chasm",
+	tasks: [
+		{
+			name: "Start",
+			after: ["Toot/Finish"],
+			priority: () => get("hasAutumnaton"),
+			ready: () => myLevel() >= 9,
+			completed: () => step("questL09Topping") !== -1,
+			do: () => visitUrl("council.php"),
+			limit: { tries: 1 },
+			freeaction: true,
+		},
+		{
+			name: "Bridge",
+			after: ["Start"],
+			priority: () => get("hasAutumnaton"),
+			completed: () => step("questL09Topping") >= 1,
+			do: (): void => {
+				if (have($item`fish hatchet`)) use($item`fish hatchet`);
+				visitUrl(
+					`place.php?whichplace=orc_chasm&action=bridge${get("chasmBridgeProgress")}`
+				); // use existing materials
+				const count = floor((34 - get("chasmBridgeProgress")) / 5);
+				if (count <= 0) return;
+				cliExecute(`acquire ${count} snow boards`);
+				visitUrl(
+					`place.php?whichplace=orc_chasm&action=bridge${get("chasmBridgeProgress")}`
+				);
+			},
+			acquire: [{ item: $item`snow berries`, num: 12 }],
+			limit: { tries: 1 },
+			freeaction: true,
+		},
+		{
+			name: "Start Peaks",
+			after: ["Bridge"],
+			priority: () => get("hasAutumnaton"),
+			completed: () => step("questL09Topping") >= 2,
+			do: () => visitUrl("place.php?whichplace=highlands&action=highlands_dude"),
+			limit: { tries: 1 },
+			freeaction: true,
+		},
+		...ABoo,
+		...Oil,
+		...Twin,
+		{
+			name: "Finish",
+			after: ["ABoo Peak", "Oil Peak", "Twin Init"],
+			completed: () => step("questL09Topping") === 999,
+			do: () => visitUrl("place.php?whichplace=highlands&action=highlands_dude"),
+			limit: { tries: 1 },
+			freeaction: true,
+		},
+	],
 };
