@@ -117,7 +117,7 @@ const Alcove: Task[] = [
 		do: $location`The Defiled Alcove`,
 		boss: true,
 		combat: new CombatStrategy().kill(),
-		limit: { tries: 1 },
+		limit: { tries: 2 },
 	},
 ];
 
@@ -154,7 +154,7 @@ const Cranny: Task[] = [
 		do: $location`The Defiled Cranny`,
 		boss: true,
 		combat: new CombatStrategy().killHard(),
-		limit: { tries: 1 },
+		limit: { tries: 2 },
 	},
 ];
 
@@ -191,7 +191,7 @@ const Niche: Task[] = [
 		do: $location`The Defiled Niche`,
 		boss: true,
 		combat: new CombatStrategy().kill(),
-		limit: { tries: 1 },
+		limit: { tries: 2 },
 	},
 ];
 
@@ -301,7 +301,7 @@ const Nook: Task[] = [
 		do: $location`The Defiled Nook`,
 		boss: true,
 		combat: new CombatStrategy().kill(),
-		limit: { tries: 1 },
+		limit: { tries: 2 },
 	},
 ];
 
