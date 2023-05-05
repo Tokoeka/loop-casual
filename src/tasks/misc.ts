@@ -1,10 +1,10 @@
 import {
 	adv1,
 	cliExecute,
-	equip,
 	expectedColdMedicineCabinet,
 	familiarEquippedEquipment,
 	familiarWeight,
+  gamedayToInt,
 	getProperty,
 	getWorkshed,
 	haveEffect,
@@ -197,11 +197,11 @@ export const MiscQuest: Quest = {
 					},
 					{
 						monster: $monster`annoyed snake`,
-						value: 25 * 0.5 + 25,
+						value: gamedayToInt(),
 					},
 					{
 						monster: $monster`slime blob`,
-						value: 20 * 0.4 + 50 * 0.2 + 250 * 0.01,
+						value: 95 - gamedayToInt(),
 					},
 				];
 
@@ -581,8 +581,6 @@ export const DigitalQuest: Quest = {
 				runChoice(1);
 				runChoice(1);
 				runChoice(1);
-				equip($item`continuum transfunctioner`);
-				set("8BitColor", "black");
 			},
 			limit: { tries: 1 },
 			freeaction: true,
@@ -618,7 +616,7 @@ export const DigitalQuest: Quest = {
 			name: "Vanya",
 			after: ["Open"],
 			completed: () => getScore() >= 10000,
-			ready: () => get("8BitColor", "black") === "black",
+			ready: () => get("8BitColor", "black") === "black" || get("8BitColor", "black") === "",
 			// eslint-disable-next-line libram/verify-constants
 			do: $location`Vanya's Castle`,
 			outfit: {
