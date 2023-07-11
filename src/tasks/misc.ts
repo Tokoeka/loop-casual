@@ -4,7 +4,7 @@ import {
 	expectedColdMedicineCabinet,
 	familiarEquippedEquipment,
 	familiarWeight,
-  gamedayToInt,
+	gamedayToInt,
 	getProperty,
 	getWorkshed,
 	haveEffect,
@@ -605,7 +605,7 @@ export const DigitalQuest: Quest = {
 			do: $location`The Fungus Plains`,
 			outfit: {
 				modifier: "meat",
-				equip: $items`continuum transfunctioner`,
+				equip: $items`continuum transfunctioner, designer sweatpants`,
 				familiar: $familiar`Robortender`,
 			},
 			combat: new CombatStrategy().kill(),
@@ -621,7 +621,7 @@ export const DigitalQuest: Quest = {
 			do: $location`Vanya's Castle`,
 			outfit: {
 				modifier: "init",
-				equip: $items`continuum transfunctioner`,
+				equip: $items`continuum transfunctioner, designer sweatpants`,
 				familiar: $familiar`Oily Woim`,
 			},
 			combat: new CombatStrategy().kill(),
@@ -635,7 +635,10 @@ export const DigitalQuest: Quest = {
 			ready: () => get("8BitColor", "black") === "blue",
 			// eslint-disable-next-line libram/verify-constants
 			do: $location`Megalo-City`,
-			outfit: { modifier: "DA", equip: $items`continuum transfunctioner` },
+			outfit: {
+				modifier: "DA",
+				equip: $items`continuum transfunctioner, designer sweatpants`,
+			},
 			combat: new CombatStrategy().kill(),
 			limit: { tries: 21 },
 			delay: 5,
@@ -647,7 +650,10 @@ export const DigitalQuest: Quest = {
 			ready: () => get("8BitColor", "black") === "green",
 			// eslint-disable-next-line libram/verify-constants
 			do: $location`Hero's Field`,
-			outfit: { modifier: "item", equip: $items`continuum transfunctioner` },
+			outfit: {
+				modifier: "item",
+				equip: $items`continuum transfunctioner, designer sweatpants`,
+			},
 			combat: new CombatStrategy().kill(),
 			limit: { tries: 21 },
 			delay: 5,
