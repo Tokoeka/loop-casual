@@ -39,8 +39,9 @@ if (get(`_feastUsed`) === 0) {
 let duped = $item`none`;
 
 if (get(`encountersUntilDMTChoice`) === 0 && get(`lastDMTDuplication`) < myAscensions()) {
-	useFamiliar($familiar`Machine Elf`);
-	const dupeItems = $items`chocomotive, cabooze, very fancy whiskey, bottle of Greedy Dog, Daily Affirmation: Always be Collecting, huge Crimbo cookie, green-iced sweet roll, bottle of Race Car Red, warbear gyro, karma shawarma`;
+	useFamiliar($familiar`Machine Elf`); // very fancy whiskey, bottle of Greedy Dog, grilled mooseflank, karma shawarma, Daily Affirmation: Always be Collecting
+	// eslint-disable-next-line libram/verify-constants
+	const dupeItems = $items`chocomotive, cabooze, corned beet, freightcake, water log, denastified haunch, pickled bread, salted mutton, huge Crimbo cookie, green-iced sweet roll, bottle of Race Car Red, bottle of Lambada Lambic, warbear gyro`;
 	const dupeVals = Array.from(dupeItems.values()).map((dupe) => {
 		return {
 			dupeIt: dupe,
