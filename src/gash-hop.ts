@@ -3,9 +3,8 @@ import {
 	$class,
 	$classes,
 	$item,
-  $path,
+	$path,
 	ascend,
-	AsdonMartin,
 	Clan,
 	get,
 	Lifestyle,
@@ -92,14 +91,14 @@ export function main(args = ""): void {
 		},
 	});
 
-	ascend(
-		$path`none`,
-		newClass,
-		Lifestyle.casual,
-		"knoll",
-		$item`astral six-pack`,
-		$item`astral shirt`
-	);
+	ascend({
+		path: $path`none`,
+		playerClass: newClass,
+		lifestyle: Lifestyle.casual,
+		moon: "knoll",
+		consumable: $item`astral six-pack`,
+		pet: $item`astral shirt`,
+	});
 	NEP();
 	//AsdonMartin.fillTo(700);
 	use($item`model train set`);
