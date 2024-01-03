@@ -406,18 +406,31 @@ export const MiscQuest: Quest = {
 			outfit: (): OutfitSpec => {
 				return { equip: $items`June cleaver, Greatest American Pants` };
 			},
-			choices: {
-				// June cleaver noncombats
-				1467: 3, // Poetic Justice
-				1468: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Aunts Not Ants
-				1469: 3, // Beware of Aligator
-				1470: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Teacher's Pet
-				1471: 1, // Lost & Found
-				1472: 1, // Summer Days
-				1473: () => (get("_juneCleaverSkips") < 5 ? 4 : 1), // Bath Time
-				1474: () => (get("_juneCleaverSkips") < 5 ? 4 : 2), // Delicious Sprouts
-				1475: 1, // Hypnotic Master
-			},
+			choices: () =>
+				get("_juneCleaverSkips") < 5
+					? {
+							1467: 3, // Poetic Justice
+							1468: 4, // Aunts Not Ants
+							1469: 3, // Beware of Aligator
+							1470: 4, // Teacher's Pet
+							1471: 1, // Lost & Found
+							1472: 1, // Summer Days
+							1473: 4, // Bath Time
+							1474: 4, // Delicious Sprouts
+							1475: 1, // Hypnotic Master
+					  }
+					: {
+							1467: 3, // Poetic Justice
+							1468: 2, // Aunts Not Ants
+							1469: 3, // Beware of Aligator
+							1470: 2, // Teacher's Pet
+							1471: 1, // Lost & Found
+							1472: 1, // Summer Days
+							1473: 1, // Bath Time
+							1474: 2, // Delicious Sprouts
+							1475: 1, // Hypnotic Master
+					  },
+			// June cleaver noncombats
 			limit: { tries: 18 },
 		},
 		{
@@ -492,13 +505,12 @@ export const KeysQuest: Quest = {
 			do: (): void => {
 				useSkill($skill`Lock Picking`);
 			},
-			choices: {
-				1414: (): number => {
-					if (!have($item`Boris's key`)) return 1;
-					else if (!have($item`Jarlsberg's key`)) return 2;
-					else return 3;
-				},
-			},
+			choices: () =>
+				!have($item`Boris's key`)
+					? { 1414: 1 }
+					: !have($item`Jarlsberg's key`)
+					? { 1414: 2 }
+					: { 1414: 3 },
 			limit: { tries: 1 },
 			freeaction: true,
 		},
