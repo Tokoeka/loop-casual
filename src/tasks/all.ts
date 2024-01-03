@@ -21,63 +21,63 @@ import { LevelingQuest } from "./leveling";
 import { getTasks } from "grimoire-kolmafia";
 
 export function all_tasks(): Task[] {
-  const quests = [
-    TootQuest,
-    LevelingQuest,
-    MiscQuest,
-    KeysQuest,
-    DietQuest,
-    MosquitoQuest,
-    TavernQuest,
-    BatQuest,
-    KnobQuest,
-    FriarQuest,
-    OrganQuest,
-    CryptQuest,
-    McLargeHugeQuest,
-    ChasmQuest,
-    GiantQuest,
-    HiddenQuest,
-    ManorQuest,
-    PalindomeQuest,
-    MacguffinQuest,
-    WarQuest,
-    DigitalQuest,
-    TowerQuest,
-  ];
-  return getTasks(quests);
+	const quests = [
+		TootQuest,
+		LevelingQuest,
+		MiscQuest,
+		KeysQuest,
+		DietQuest,
+		MosquitoQuest,
+		TavernQuest,
+		BatQuest,
+		KnobQuest,
+		FriarQuest,
+		OrganQuest,
+		CryptQuest,
+		McLargeHugeQuest,
+		ChasmQuest,
+		GiantQuest,
+		HiddenQuest,
+		ManorQuest,
+		PalindomeQuest,
+		MacguffinQuest,
+		WarQuest,
+		DigitalQuest,
+		TowerQuest,
+	];
+	return getTasks(quests);
 }
 
 export function quest_tasks(): Task[] {
-  const quests = [
-    TootQuest,
-    MiscQuest,
-    KeysQuest,
-    DietQuest,
-    MosquitoQuest,
-    TavernQuest,
-    BatQuest,
-    KnobQuest,
-    FriarQuest,
-    CryptQuest,
-    McLargeHugeQuest,
-    ChasmQuest,
-    GiantQuest,
-    HiddenQuest,
-    ManorQuest,
-    PalindomeQuest,
-    MacguffinQuest,
-    WarQuest,
-    DigitalQuest,
-    TowerQuest,
-  ];
-  return getTasks(quests);
+	const quests = [
+		TootQuest,
+		MiscQuest,
+		KeysQuest,
+		DietQuest,
+		MosquitoQuest,
+		TavernQuest,
+		BatQuest,
+		KnobQuest,
+		FriarQuest,
+		CryptQuest,
+		McLargeHugeQuest,
+		ChasmQuest,
+		GiantQuest,
+		HiddenQuest,
+		ManorQuest,
+		PalindomeQuest,
+		MacguffinQuest,
+		WarQuest,
+		DigitalQuest,
+		TowerQuest,
+	];
+	return getTasks(quests);
 }
 
 export function level_tasks(): Task[] {
-  return getTasks([LevelingQuest]);
+	return getTasks([LevelingQuest]);
 }
 
 export function organ_tasks(): Task[] {
-  return getTasks([TootQuest, FriarQuest, OrganQuest]);
+	return getTasks([TootQuest, FriarQuest, OrganQuest]);
 }

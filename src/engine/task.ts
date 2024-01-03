@@ -3,12 +3,12 @@ import { Quest as BaseQuest, Task as BaseTask, Limit } from "grimoire-kolmafia";
 
 export type Quest = BaseQuest<Task>;
 export type Task = {
-  priority?: () => boolean;
-  combat?: CombatStrategy;
-  delay?: number | (() => number);
-  freeaction?: boolean;
-  freecombat?: boolean;
-  limit: Limit;
-  noadventures?: boolean;
-  boss?: boolean;
+	priority?: () => boolean;
+	combat?: CombatStrategy;
+	delay?: number | (() => number);
+	freeaction?: boolean;
+	freecombat?: boolean;
+	limit: Limit;
+	noadventures?: boolean;
+	boss?: boolean;
 } & BaseTask<CombatActions>;

@@ -213,10 +213,10 @@ export class Engine extends BaseEngine<CombatActions, ActiveTask> {
 		return outfit;
 	}
 
-  dress(task: Task, outfit: Outfit): void {
-    outfit.dress();
-    fixFoldables(outfit);
-    applyEffects(outfit.modifier.join(", "));
+	dress(task: Task, outfit: Outfit): void {
+		outfit.dress();
+		fixFoldables(outfit);
+		applyEffects(outfit.modifier.join(", "));
 
 		// HP/MP upkeep
 		if (!task.freeaction) {
