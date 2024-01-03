@@ -1,4 +1,4 @@
-import { create, Item, myHash, runChoice, use, visitUrl } from "kolmafia";
+import { create, haveEquipped, Item, myHash, runChoice, use, visitUrl } from "kolmafia";
 import {
 	$effect,
 	$familiar,
@@ -140,8 +140,17 @@ const Zepplin: Task[] = [
 		completed: () => step("questL11Ron") >= 1,
 		do: $location`A Mob of Zeppelin Protesters`,
 		combat: new CombatStrategy().killHard($monster`The Nuge`),
-		choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
+		choices: {
+			856: 1,
+			857: haveEquipped($item`candy cane sword cane`) ? 2 : 1,
+			858: 1,
+			866: 2,
+			1432: 1,
+		},
 		limit: { tries: 1 },
+		outfit: {
+			equip: $items`candy cane sword cane`,
+		},
 		freeaction: true,
 	},
 	{
@@ -158,11 +167,17 @@ const Zepplin: Task[] = [
 		},
 		do: $location`A Mob of Zeppelin Protesters`,
 		combat: new CombatStrategy().killHard($monster`The Nuge`),
-		choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
+		choices: {
+			856: 1,
+			857: haveEquipped($item`candy cane sword cane`) ? 2 : 1,
+			858: 1,
+			866: 2,
+			1432: 1,
+		},
 		outfit: {
 			modifier: "sleaze dmg, sleaze spell dmg",
 			familiar: $familiar`Left-Hand Man`,
-			equip: $items`June cleaver`,
+			equip: $items`candy cane sword cane`,
 		},
 		freeaction: true, // fully maximize outfit
 		limit: { tries: 5, message: "Maybe your available sleaze damage is too low." },
@@ -176,7 +191,13 @@ const Zepplin: Task[] = [
 		combat: new CombatStrategy()
 			.killHard($monster`The Nuge`)
 			.macro(new Macro().item($item`cigarette lighter`)),
-		choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
+		choices: {
+			856: 1,
+			857: haveEquipped($item`candy cane sword cane`) ? 2 : 1,
+			858: 1,
+			866: 2,
+			1432: 1,
+		},
 		limit: { tries: 2, message: "Well This didn't work" },
 	},
 	{
@@ -185,7 +206,13 @@ const Zepplin: Task[] = [
 		completed: () => step("questL11Ron") >= 2,
 		do: $location`A Mob of Zeppelin Protesters`,
 		combat: new CombatStrategy().killHard($monster`The Nuge`),
-		choices: { 856: 1, 857: 1, 858: 1, 866: 2, 1432: 1 },
+		choices: {
+			856: 1,
+			857: haveEquipped($item`candy cane sword cane`) ? 2 : 1,
+			858: 1,
+			866: 2,
+			1432: 1,
+		},
 		limit: { tries: 2 }, // If clovers were used before the intro adventure, we need to clear both the intro and closing advs here.
 		freeaction: true,
 	},
