@@ -260,7 +260,7 @@ const Nook: Task[] = [
 		ready: () => have($item`evil eye`),
 		completed: () => get("cyrptNookEvilness") <= 13,
 		do: (): void => {
-			cliExecute("use * evil eye");
+			cliExecute("use evil eye");
 		},
 		freeaction: true,
 		limit: { tries: 9 },
@@ -279,7 +279,7 @@ const Nook: Task[] = [
 		do: $location`The Defiled Nook`,
 		post: (): void => {
 			while (have($item`evil eye`) && get("cyrptNookEvilness") > 13)
-				cliExecute("use * evil eye");
+				cliExecute("use evil eye");
 		},
 		outfit: (): OutfitSpec => {
 			return {
@@ -327,10 +327,10 @@ export const CryptQuest: Quest = {
 			after: ["Alcove Boss", "Cranny Boss", "Niche Boss", "Nook Boss"],
 			completed: () => step("questL07Cyrptic") >= 1,
 			do: () => {
-        adv1($location`Haert of the Cyrpt`, -1, "");
-        if (get("lastEncounter") !== "The Bonerdagon")
-          visitUrl(toUrl($location`The Defiled Cranny`));
-      },
+				adv1($location`Haert of the Cyrpt`, -1, "");
+				if (get("lastEncounter") !== "The Bonerdagon")
+					visitUrl(toUrl($location`The Defiled Cranny`));
+			},
 			choices: { 527: 1 },
 			boss: true,
 			combat: new CombatStrategy().kill(),
